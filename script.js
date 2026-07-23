@@ -71,7 +71,7 @@ const MODULES = [
     tag: "Module 02",
     title: "Structure & Properties",
     description: "Explore how graphs connect and behave — understand connectivity, completeness, cycles, and the many ways edges can carry meaning through weights, multiplicity, and self-loops.",
-    videoId: null,
+    videoId: F6aXFnqwYkM,
     graphs: [
       {
         name: "Connected Graph",
