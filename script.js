@@ -7,7 +7,6 @@ const MODULES = [
     tag: "Module 01",
     title: "The Fundamentals",
     description: "Learn the foundational building blocks of graph theory — from the simplest null and trivial graphs to the essential distinction between directed and undirected structures.",
-    // Replace null with your YouTube video ID string, e.g. "dQw4w9WgXcQ"
     videoId: "uY3xe3SAsY0",
     graphs: [
       {
@@ -59,7 +58,7 @@ const MODULES = [
       { question: "In a directed graph, an edge from A to B means:", options: ["You can travel both ways between A and B", "You can only travel from A to B", "A and B are the same vertex", "The edge has a weight"], answer: 1 },
       { question: "True or False: In an undirected graph, the edge (A, B) is the same as (B, A).", options: ["True", "False"], answer: 0 },
       { question: "What is the main feature of a path graph?", options: ["Every vertex connects to every other vertex", "It contains cycles", "All vertices are connected in a single straight-line sequence", "It has self-loops"], answer: 2 },
-      { question: "A path graph P\u2086 has how many edges?", options: ["6", "7", "5", "12"], answer: 2 },
+      { question: "Which statement about a path graph is FALSE?", options: ["It has no cycles", "It is always connected", "Every vertex connects to every other vertex", "Each vertex connects only to its immediate neighbors"], answer: 2 },
       { question: "True or False: A null graph with 5 vertices has 0 edges.", options: ["True", "False"], answer: 0 },
       { question: "How is a directed graph different from an undirected graph?", options: ["Directed graphs have more vertices", "Undirected graphs always have weights", "Directed edges have direction; undirected edges do not", "There is no real difference"], answer: 2 },
       { question: "True or False: A trivial graph is also a null graph.", options: ["True", "False"], answer: 0 },
@@ -122,7 +121,7 @@ const MODULES = [
     quiz: [
       { question: "What does it mean for a graph to be \"connected\"?", options: ["Every vertex has the same degree", "All edges have weights", "You can reach any vertex from any other vertex through some path", "The graph has no edges"], answer: 2 },
       { question: "True or False: A disconnected graph has at least two separate parts not connected to each other.", options: ["True", "False"], answer: 0 },
-      { question: "In a complete graph K\u2085, each vertex is connected to:", options: ["2 other vertices", "4 other vertices", "3 other vertices", "5 other vertices"], answer: 1 },
+      { question: "What is the defining property of a complete graph?", options: ["Every vertex has the same degree", "There is an edge between every pair of vertices", "It contains no cycles", "It is always disconnected"], answer: 1 },
       { question: "What does \"3-regular graph\" mean?", options: ["The graph has exactly 3 vertices", "The graph has exactly 3 edges", "Every vertex has exactly degree 3", "The graph has 3 cycles"], answer: 2 },
       { question: "An acyclic graph is a graph that:", options: ["Has exactly one cycle", "Has many cycles", "Has self-loops", "Has no cycles at all"], answer: 3 },
       { question: "In a weighted graph, what do the numbers on edges represent?", options: ["Direction of travel", "Color coding", "A value like distance, cost, or time", "The number of vertices"], answer: 2 },
@@ -130,7 +129,7 @@ const MODULES = [
       { question: "How is a pseudo-graph different from a multi-graph?", options: ["They are exactly the same", "A pseudo-graph allows self-loops; a multi-graph does not", "A multi-graph allows self-loops; a pseudo-graph does not", "A pseudo-graph has no edges"], answer: 1 },
       { question: "A cyclic graph must contain:", options: ["Self-loops", "An even number of vertices", "All vertices of equal degree", "At least one closed path (cycle)"], answer: 3 },
       { question: "True or False: Every complete graph is also a regular graph.", options: ["True", "False"], answer: 0 },
-      { question: "How many edges are in a complete graph with 6 vertices (K\u2086)?", options: ["6", "12", "36", "15"], answer: 3 },
+      { question: "Which type of graph is commonly used to model hierarchical relationships?", options: ["Complete graph", "Cyclic graph", "Tree", "Multi-graph"], answer: 2 },
       { question: "A graph that is both connected and acyclic is called:", options: ["A complete graph", "A regular graph", "A tree", "A wheel graph"], answer: 2 }
     ]
   },
@@ -175,15 +174,15 @@ const MODULES = [
     quiz: [
       { question: "What defines a bipartite graph?", options: ["Every vertex has the same degree", "The graph has no edges", "Vertices split into two groups with edges only between groups, never within", "The graph is always complete"], answer: 2 },
       { question: "True or False: Every complete bipartite graph is also a bipartite graph.", options: ["True", "False"], answer: 0 },
-      { question: "In K\u2083\u2083, how many edges are there?", options: ["6", "9", "12", "18"], answer: 1 },
+      { question: "What is the key characteristic that separates bipartite graphs from other graphs?", options: ["They have no edges", "Their vertices can be divided into two groups with no edges within the same group", "Every vertex has the same degree", "They always contain cycles"], answer: 1 },
       { question: "What does it mean for a graph to be planar?", options: ["It has no cycles", "It is bipartite", "It can be drawn on a flat surface without edges crossing", "It has equal vertices and edges"], answer: 2 },
       { question: "True or False: K\u2085 (complete graph with 5 vertices) is planar.", options: ["True", "False"], answer: 1 },
       { question: "K\u2083\u2083 is:", options: ["Planar", "Non-planar", "A tree", "A null graph"], answer: 1 },
       { question: "A wheel graph is made up of:", options: ["Only isolated vertices", "A complete graph", "A cycle with one extra central vertex connected to every vertex on the cycle", "Two separate paths"], answer: 2 },
-      { question: "True or False: A hypercube Q\u2083 has 8 vertices.", options: ["True", "False"], answer: 0 },
+      { question: "What property defines the edges in a hypercube?", options: ["Every vertex connects to every other vertex", "Edges connect binary strings that differ in exactly one bit", "All edges have equal weights", "Edges only exist between the two halves"], answer: 1 },
       { question: "A hypercube Q\u2099 has how many vertices?", options: ["n", "2n", "2\u207F", "n\u00B2"], answer: 2 },
       { question: "True or False: Every tree is a planar graph.", options: ["True", "False"], answer: 0 },
-      { question: "How many edges does a wheel graph W\u2086 have (6 total vertices)?", options: ["6", "10", "12", "15"], answer: 1 },
+      { question: "Which graph type naturally models a multi-dimensional cube?", options: ["Bipartite graph", "Hypercube graph", "Wheel graph", "Planar graph"], answer: 1 },
       { question: "A hypercube Q\u2083 looks like:", options: ["A square", "A cube", "A triangle", "A star"], answer: 1 }
     ]
   }
