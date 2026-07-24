@@ -210,7 +210,17 @@ function renderNav() {
         <p>${mod.graphs.length} concepts</p>
       </div>
     </div>
-  `).join('');
+  `).join('') + `
+    <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+      <div class="nav-item" onclick="window.location.href='game.html'" style="cursor:pointer;">
+        <span class="nav-number" style="color: var(--accent); font-size: 18px;">&#9654;</span>
+        <div class="nav-info">
+          <h3>Graph Builder</h3>
+          <p>Interactive sandbox</p>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 function renderModule(index) {

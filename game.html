@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Builder — Graph Theory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div class="game-page">
+        <header class="game-header">
+            <a href="index.html" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Lessons
+            </a>
+            <h1 class="game-title">Graph Builder</h1>
+            <div class="header-right">
+                <span class="header-badge">Sandbox</span>
+            </div>
+        </header>
+
+        <div class="toolbar">
+            <div class="tool-group">
+                <button class="tool-btn active" data-mode="node" title="Add Node (1)">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4.5" fill="currentColor"/></svg>
+                    <span>Node</span>
+                </button>
+                <button class="tool-btn" data-mode="edge" title="Add Edge (2)">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="13" x2="13" y2="3" stroke="currentColor" stroke-width="1.5"/><circle cx="3" cy="13" r="2" fill="currentColor"/><circle cx="13" cy="3" r="2" fill="currentColor"/></svg>
+                    <span>Edge</span>
+                </button>
+                <button class="tool-btn" data-mode="move" title="Move (3)">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 1l2 3H6l2-3zm0 14l-2-3h4l-2 3zM1 8l3-2v4l-3-2zm14 0l-3-2v4l3-2z" fill="currentColor"/></svg>
+                    <span>Move</span>
+                </button>
+                <button class="tool-btn" data-mode="delete" title="Delete (4)">
+                    <svg width="16" height="16" viewBox="0 0 16 16"><line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    <span>Delete</span>
+                </button>
+            </div>
+            <div class="tool-sep"></div>
+            <button class="tool-btn danger" id="clearBtn" title="Clear All">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3a1 1 0 011-1h2a1 1 0 011 1v1M5 4v8a1 1 0 001 1h4a1 1 0 001-1V4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                <span>Clear</span>
+            </button>
+        </div>
+
+        <div class="game-body">
+            <div class="canvas-wrap" id="canvasWrap">
+                <svg id="canvas" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="gridPat" width="30" height="30" patternUnits="userSpaceOnUse">
+                            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="0.5"/>
+                        </pattern>
+                    </defs>
+                    <rect id="bgRect" width="100%" height="100%" fill="url(#gridPat)"/>
+                    <g id="edgesGroup"></g>
+                    <g id="tempGroup"></g>
+                    <g id="nodesGroup"></g>
+                </svg>
+                <div class="canvas-hint" id="canvasHint">Click anywhere to add a vertex</div>
+            </div>
+
+            <aside class="side-panel">
+                <div class="challenge-card" id="challengeCard">
+                    <div class="challenge-top">
+                        <span class="challenge-badge" id="challengeBadge">1 / 10</span>
+                        <div class="challenge-nav">
+                            <button class="nav-btn" id="prevChallenge">‹</button>
+                            <button class="nav-btn" id="nextChallenge">›</button>
+                        </div>
+                    </div>
+                    <h3 class="challenge-title" id="challengeTitle"></h3>
+                    <p class="challenge-task" id="challengeTask"></p>
+                    <p class="challenge-desc" id="challengeDesc"></p>
+                    <div class="challenge-success" id="challengeSuccess">
+                        <span class="success-icon">✓</span>
+                        <span>Challenge Complete!</span>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <div class="progress-dots" id="progressDots"></div>
+                    <span class="progress-text" id="progressText">0 / 10 completed</span>
+                </div>
+
+                <div class="class-panel">
+                    <div class="class-header">
+                        <span class="class-title">Classification</span>
+                        <span class="class-live">LIVE</span>
+                    </div>
+
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <span class="stat-num" id="statVertices">0</span>
+                            <span class="stat-lbl">Vertices</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num" id="statEdges">0</span>
+                            <span class="stat-lbl">Edges</span>
+                        </div>
+                    </div>
+
+                    <div class="props-list">
+                        <div class="prop-row" id="propConnected"><span class="prop-name">Connected</span><span class="prop-val">—</span></div>
+                        <div class="prop-row" id="propAcyclic"><span class="prop-name">Acyclic</span><span class="prop-val">—</span></div>
+                        <div class="prop-row" id="propRegular"><span class="prop-name">Regular</span><span class="prop-val">—</span></div>
+                        <div class="prop-row" id="propComplete"><span class="prop-name">Complete</span><span class="prop-val">—</span></div>
+                        <div class="prop-row" id="propBipartite"><span class="prop-name">Bipartite</span><span class="prop-val">—</span></div>
+                        <div class="prop-row" id="propPlanar"><span class="prop-name">Planar</span><span class="prop-val">—</span></div>
+                        <div class="prop-row" id="propSimple"><span class="prop-name">Simple</span><span class="prop-val">—</span></div>
+                    </div>
+
+                    <div class="type-display">
+                        <span class="type-lbl">Detected Type</span>
+                        <span class="type-val" id="graphType">Empty Canvas</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

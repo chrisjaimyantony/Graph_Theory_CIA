@@ -1,0 +1,308 @@
+:root {
+    --bg: #08080c;
+    --surface: #0e0e14;
+    --surface-2: #141420;
+    --border: #1c1c2e;
+    --accent: #00e5a0;
+    --accent-dim: rgba(0,229,160,0.15);
+    --accent-glow: rgba(0,229,160,0.08);
+    --text-primary: #e8e6e1;
+    --text-secondary: #9a9aaa;
+    --text-muted: #555568;
+    --correct: #00e5a0;
+    --incorrect: #ff4466;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; }
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--text-primary);
+    background: var(--bg);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ─── PAGE LAYOUT ─── */
+.game-page { display: flex; flex-direction: column; height: 100vh; }
+
+.game-header {
+    display: flex; align-items: center; gap: 16px;
+    padding: 0 20px; height: 52px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0; z-index: 10;
+}
+.back-link {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none; transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+.game-title {
+    font-family: 'Syne', sans-serif; font-size: 15px;
+    font-weight: 700; letter-spacing: 0.3px;
+}
+.header-right { margin-left: auto; }
+.header-badge {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-dim);
+    padding: 3px 10px; border-radius: 4px;
+    border: 1px solid rgba(0,229,160,0.2);
+}
+
+/* ─── TOOLBAR ─── */
+.toolbar {
+    display: flex; align-items: center; gap: 4px;
+    padding: 8px 16px; background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+.tool-group { display: flex; gap: 2px; }
+.tool-sep { width: 1px; height: 28px; background: var(--border); margin: 0 8px; }
+.tool-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border-radius: 6px;
+    border: 1px solid transparent; background: transparent;
+    color: var(--text-secondary); font-size: 12px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; font-family: inherit;
+}
+.tool-btn:hover { background: var(--surface-2); color: var(--text-primary); }
+.tool-btn.active {
+    background: var(--accent-glow); color: var(--accent);
+    border-color: rgba(0,229,160,0.25);
+}
+.tool-btn.danger:hover { color: var(--incorrect); background: rgba(255,68,102,0.08); }
+.tool-btn svg { flex-shrink: 0; }
+
+/* ─── GAME BODY ─── */
+.game-body { display: flex; flex: 1; overflow: hidden; }
+
+/* ─── CANVAS ─── */
+.canvas-wrap {
+    flex: 1; position: relative; overflow: hidden;
+    background: var(--bg);
+}
+.canvas-wrap[data-mode="node"] { cursor: crosshair; }
+.canvas-wrap[data-mode="edge"] { cursor: default; }
+.canvas-wrap[data-mode="move"] { cursor: grab; }
+.canvas-wrap[data-mode="move"].dragging { cursor: grabbing; }
+.canvas-wrap[data-mode="delete"] { cursor: pointer; }
+
+#canvas { width: 100%; height: 100%; display: block; user-select: none; }
+
+.canvas-hint {
+    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    color: var(--text-muted); letter-spacing: 0.5px;
+    background: rgba(14,14,20,0.85); padding: 6px 16px;
+    border-radius: 6px; border: 1px solid var(--border);
+    pointer-events: none; transition: opacity 0.3s;
+}
+
+/* ─── SVG ELEMENTS ─── */
+.node {
+    fill: var(--accent); cursor: pointer;
+    transition: r 0.15s ease, filter 0.15s;
+}
+.node:hover { filter: drop-shadow(0 0 6px rgba(0,229,160,0.5)); }
+.node-label {
+    fill: var(--bg); font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 700;
+    pointer-events: none; user-select: none;
+}
+.edge {
+    stroke: var(--accent); stroke-width: 2.5; opacity: 0.35;
+    stroke-linecap: round; cursor: pointer;
+    transition: opacity 0.2s;
+}
+.edge:hover { opacity: 0.7; }
+.temp-edge {
+    stroke: var(--accent); stroke-width: 2;
+    stroke-dasharray: 6 4; opacity: 0.4;
+    pointer-events: none;
+}
+
+/* ─── SIDE PANEL ─── */
+.side-panel {
+    width: 320px; flex-shrink: 0;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    overflow-y: auto; padding: 16px;
+    display: flex; flex-direction: column; gap: 14px;
+}
+.side-panel::-webkit-scrollbar { width: 4px; }
+.side-panel::-webkit-scrollbar-track { background: var(--surface); }
+.side-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ─── CHALLENGE CARD ─── */
+.challenge-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.challenge-card.completed {
+    border-color: rgba(0,229,160,0.35);
+    box-shadow: 0 0 20px rgba(0,229,160,0.08);
+}
+.challenge-top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+}
+.challenge-badge {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    color: var(--text-muted); letter-spacing: 1px;
+}
+.challenge-nav { display: flex; gap: 4px; }
+.nav-btn {
+    width: 28px; height: 28px; border-radius: 6px;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--text-secondary); font-size: 16px;
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; transition: all 0.2s;
+    font-family: inherit;
+}
+.nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+.challenge-title {
+    font-family: 'Syne', sans-serif; font-size: 16px;
+    font-weight: 700; margin-bottom: 6px;
+}
+.challenge-task {
+    font-size: 13px; font-weight: 500;
+    color: var(--text-secondary); margin-bottom: 8px; line-height: 1.5;
+}
+.challenge-desc {
+    font-size: 12px; color: var(--text-muted); line-height: 1.55;
+}
+.challenge-success {
+    display: none; align-items: center; gap: 8px;
+    margin-top: 12px; padding: 10px 14px;
+    background: var(--accent-glow); border: 1px solid rgba(0,229,160,0.2);
+    border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--accent);
+}
+.challenge-success.show { display: flex; animation: slideUp 0.3s ease; }
+.success-icon {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent); color: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800;
+}
+
+/* ─── PROGRESS ─── */
+.progress-section { text-align: center; }
+.progress-dots { display: flex; justify-content: center; gap: 6px; margin-bottom: 8px; }
+.dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--border); transition: all 0.3s;
+}
+.dot.current { background: var(--accent); box-shadow: 0 0 8px rgba(0,229,160,0.4); }
+.dot.completed { background: var(--accent); opacity: 0.5; }
+.progress-text {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    color: var(--text-muted); letter-spacing: 1px;
+}
+
+/* ─── CLASSIFICATION PANEL ─── */
+.class-panel {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px;
+    flex: 1;
+}
+.class-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 14px;
+}
+.class-title {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted);
+}
+.class-live {
+    font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+    letter-spacing: 1.5px; color: var(--accent);
+    display: flex; align-items: center; gap: 5px;
+}
+.class-live::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); animation: pulse 1.5s infinite;
+}
+
+.stats-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    margin-bottom: 14px;
+}
+.stat-box {
+    background: var(--bg); border-radius: 8px; padding: 12px;
+    text-align: center; border: 1px solid var(--border);
+}
+.stat-num {
+    font-family: 'Syne', sans-serif; font-size: 24px;
+    font-weight: 800; color: var(--accent); display: block;
+}
+.stat-lbl {
+    font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted);
+}
+
+.props-list { display: flex; flex-direction: column; gap: 1px; }
+.prop-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 10px; border-radius: 4px;
+    transition: background 0.2s;
+}
+.prop-row:hover { background: rgba(255,255,255,0.02); }
+.prop-name {
+    font-size: 12px; color: var(--text-secondary);
+}
+.prop-val {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    font-weight: 500; color: var(--text-muted);
+    transition: color 0.3s;
+}
+.prop-val.yes { color: var(--correct); }
+.prop-val.no { color: var(--incorrect); }
+
+.type-display {
+    margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+}
+.type-lbl {
+    display: block; font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 6px;
+}
+.type-val {
+    font-family: 'Syne', sans-serif; font-size: 17px;
+    font-weight: 700; color: var(--accent);
+    transition: transform 0.2s;
+}
+.type-val.bump { animation: bump 0.3s ease; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+@keyframes bump {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 800px) {
+    .game-body { flex-direction: column; }
+    .canvas-wrap { height: 45%; flex: none; }
+    .side-panel { width: 100%; flex: 1; border-left: none; border-top: 1px solid var(--border); }
+    .game-header { padding: 0 12px; }
+    .toolbar { padding: 6px 10px; overflow-x: auto; }
+    .tool-btn span { display: none; }
+    .tool-btn { padding: 7px 10px; }
+}
