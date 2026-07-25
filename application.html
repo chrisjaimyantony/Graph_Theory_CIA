@@ -11,7 +11,6 @@
 </head>
 <body>
     <div class="app-page">
-
         <header class="app-header">
             <a href="index.html" class="back-link">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -25,56 +24,39 @@
         </header>
 
         <div class="app-body">
-
-            <aside class="sidebar-panel">
+            <aside class="sidebar-panel" id="sidebarPanel">
 
                 <div class="control-card">
-                    <h3 class="card-heading">Select Stations</h3>
+                    <h3 class="card-heading">Route Finder</h3>
                     <div class="select-row">
                         <label>From</label>
-                        <select id="sourceSelect">
-                            <option value="">— choose —</option>
-                        </select>
+                        <select id="sourceSelect"><option value="">— choose station —</option></select>
                     </div>
                     <div class="select-row">
                         <label>To</label>
-                        <select id="destSelect">
-                            <option value="">— choose —</option>
-                        </select>
+                        <select id="destSelect"><option value="">— choose station —</option></select>
                     </div>
                     <div class="btn-row">
                         <button class="btn btn-primary" id="findPathBtn">Find Shortest Path</button>
                         <button class="btn btn-outline" id="resetBtn">Reset</button>
                     </div>
+                    <button class="btn btn-ghost" id="randomBtn">Random Route</button>
+                    <p class="hint-text">Click stations on the map to select them</p>
+                </div>
+
+                <div class="control-card" id="pathCard" style="display:none;">
+                    <h3 class="card-heading">Path Found</h3>
+                    <div id="pathOutput"></div>
+                </div>
+
+                <div class="control-card" id="analysisCard" style="display:none;">
+                    <h3 class="card-heading">Graph Analysis</h3>
+                    <div id="analysisOutput"></div>
                 </div>
 
                 <div class="control-card">
-                    <h3 class="card-heading">Path Statistics</h3>
-                    <div id="pathOutput" class="path-output">
-                        <p class="path-empty">Select two stations and find a path to see route details.</p>
-                    </div>
-                </div>
-
-                <div class="control-card">
-                    <h3 class="card-heading">Graph Properties</h3>
-                    <div class="props-grid">
-                        <div class="mini-prop">
-                            <span class="mini-val" id="mpV">0</span>
-                            <span class="mini-lbl">Vertices</span>
-                        </div>
-                        <div class="mini-prop">
-                            <span class="mini-val" id="mpE">0</span>
-                            <span class="mini-lbl">Edges</span>
-                        </div>
-                        <div class="mini-prop">
-                            <span class="mini-val" id="mpLines">0</span>
-                            <span class="mini-lbl">Lines</span>
-                        </div>
-                        <div class="mini-prop">
-                            <span class="mini-val" id="mpInt">0</span>
-                            <span class="mini-lbl">Interchanges</span>
-                        </div>
-                    </div>
+                    <h3 class="card-heading">Network Properties</h3>
+                    <div class="props-grid" id="propsGrid"></div>
                     <div class="detected-props" id="detectedProps"></div>
                 </div>
 
@@ -87,17 +69,23 @@
 
             <main class="map-area">
                 <div class="map-wrap" id="mapWrap">
-                    <svg id="metroMap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550">
+                    <svg id="metroMap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+                        <defs>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="blur"/>
+                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                        </defs>
                         <g id="edgesG"></g>
                         <g id="pathG"></g>
                         <g id="nodesG"></g>
+                        <g id="legendG" transform="translate(20,485)"></g>
                     </svg>
                 </div>
                 <div class="station-info" id="stationInfo">
-                    <span class="info-empty">Hover or click a station on the map</span>
+                    <span class="info-empty">Hover over a station to see details · Click to select</span>
                 </div>
             </main>
-
         </div>
     </div>
     <script src="application.js"></script>

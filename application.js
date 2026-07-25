@@ -1,249 +1,251 @@
 /* =============================================
-   STATION DATA
+   DMRC METRO DATA — SINGLE NODE PER STATION
    ============================================= */
 const STATIONS = [
-  // ── Blue Line ──
-  { id:'dwarka_sec21', name:'Dwarka Sec 21', x:70, y:280, line:'blue', interchange:false },
-  { id:'dwarka', name:'Dwarka', x:130, y:280, line:'blue', interchange:false },
-  { id:'dwarka_mor', name:'Dwarka Mor', x:190, y:280, line:'blue', interchange:false },
-  { id:'rajouri_garden', name:'Rajouri Garden', x:260, y:280, line:'blue', interchange:true },
-  { id:'kirti_nagar', name:'Kirti Nagar', x:330, y:280, line:'blue', interchange:true },
-  { id:'karol_bagh', name:'Karol Bagh', x:400, y:280, line:'blue', interchange:false },
-  { id:'rajiv_chowk', name:'Rajiv Chowk', x:470, y:280, line:'blue', interchange:true },
-  { id:'barakhamba', name:'Barakhamba', x:530, y:280, line:'blue', interchange:false },
-  { id:'pragati_maidan', name:'Pragati Maidan', x:590, y:280, line:'blue', interchange:false },
-  { id:'akshardham', name:'Akshardham', x:660, y:280, line:'blue', interchange:false },
-  { id:'noida_sec18', name:'Noida Sec 18', x:730, y:280, line:'blue', interchange:false },
-
   // ── Yellow Line ──
-  { id:'samaypur_badli', name:'Samaypur Badli', x:470, y:60, line:'yellow', interchange:false },
-  { id:'azadpur', name:'Azadpur', x:470, y:110, line:'yellow', interchange:false },
-  { id:'civil_lines', name:'Civil Lines', x:470, y:155, line:'yellow', interchange:false },
-  { id:'kashmere_gate', name:'Kashmere Gate', x:470, y:195, line:'yellow', interchange:true },
-  { id:'chandni_chowk', name:'Chandni Chowk', x:470, y:235, line:'yellow', interchange:false },
-  { id:'rajiv_chowk_y', name:'Rajiv Chowk', x:470, y:280, line:'yellow', interchange:true, alias:'rajiv_chowk' },
-  { id:'patel_chowk', name:'Patel Chowk', x:470, y:330, line:'yellow', interchange:false },
-  { id:'central_sec', name:'Central Secretariat', x:470, y:380, line:'yellow', interchange:true },
-  { id:'uddyan_marg', name:'Udyog Bhawan', x:470, y:430, line:'yellow', interchange:false },
-  { id:'hauz_khas', name:'Hauz Khas', x:470, y:480, line:'yellow', interchange:true },
-  { id:'malviya_nagar', name:'Malviya Nagar', x:470, y:530, line:'yellow', interchange:false },
+  { id:'samaypur_badli', name:'Samaypur Badli', x:420, y:40, lines:['yellow'] },
+  { id:'azadpur', name:'Azadpur', x:420, y:80, lines:['yellow'] },
+  { id:'civil_lines', name:'Civil Lines', x:420, y:120, lines:['yellow'] },
+  { id:'kashmere_gate', name:'Kashmere Gate', x:420, y:165, lines:['yellow','red','violet'] },
+  { id:'chandni_chowk', name:'Chandni Chowk', x:420, y:200, lines:['yellow'] },
+  { id:'new_delhi', name:'New Delhi', x:420, y:235, lines:['yellow'] },
+  { id:'rajiv_chowk', name:'Rajiv Chowk', x:420, y:275, lines:['yellow','blue'] },
+  { id:'patel_chowk', name:'Patel Chowk', x:420, y:310, lines:['yellow'] },
+  { id:'central_sec', name:'Central Secretariat', x:420, y:355, lines:['yellow','violet'] },
+  { id:'udyog_bhawan', name:'Udyog Bhawan', x:420, y:390, lines:['yellow'] },
+  { id:'jorbagh', name:'Jorbagh', x:420, y:425, lines:['yellow'] },
+  { id:'hauz_khas', name:'Hauz Khas', x:420, y:465, lines:['yellow'] },
 
-  // ── Red Line ──
-  { id:'rithala', name:'Rithala', x:150, y:120, line:'red', interchange:false },
-  { id:'rohini_sec18', name:'Rohini Sec 18', x:220, y:120, line:'red', interchange:false },
-  { id:'pitampura', name:'Pitampura', x:290, y:120, line:'red', interchange:false },
-  { id:'kohat_enclave', name:'Kohat Enclave', x:350, y:145, line:'red', interchange:false },
-  { id:'netaji_subhash', name:'Netaji Subhash Place', x:400, y:170, line:'red', interchange:true },
-  { id:'kashmere_gate_r', name:'Kashmere Gate', x:470, y:195, line:'red', interchange:true, alias:'kashmere_gate' },
-  { id:'tis_hazari', name:'Tis Hazari', x:540, y:170, line:'red', interchange:false },
-  { id:'pul_bangash', name:'Pul Bangash', x:600, y:145, line:'red', interchange:false },
-  { id:'pratap_nagar', name:'Pratap Nagar', x:660, y:120, line:'red', interchange:false },
-  { id:'shastri_nagar', name:'Shastri Nagar', x:730, y:120, line:'red', interchange:false },
+  // ── Blue Line (unique only) ──
+  { id:'dwarka_sec21', name:'Dwarka Sec 21', x:50, y:275, lines:['blue'] },
+  { id:'dwarka', name:'Dwarka', x:100, y:275, lines:['blue'] },
+  { id:'dwarka_mor', name:'Dwarka Mor', x:150, y:275, lines:['blue'] },
+  { id:'rajouri_garden', name:'Rajouri Garden', x:215, y:275, lines:['blue'] },
+  { id:'kirti_nagar', name:'Kirti Nagar', x:280, y:275, lines:['blue','green'] },
+  { id:'karol_bagh', name:'Karol Bagh', x:340, y:275, lines:['blue'] },
+  { id:'barakhamba', name:'Barakhamba', x:475, y:275, lines:['blue'] },
+  { id:'mandi_house', name:'Mandi House', x:540, y:255, lines:['blue','violet'] },
+  { id:'pragati_maidan', name:'Pragati Maidan', x:600, y:260, lines:['blue'] },
+  { id:'akshardham', name:'Akshardham', x:665, y:268, lines:['blue'] },
+  { id:'noida_sec18', name:'Noida Sec 18', x:745, y:275, lines:['blue'] },
 
-  // ── Green Line ──
-  { id:'kirti_nagar_g', name:'Kirti Nagar', x:330, y:280, line:'green', interchange:true, alias:'kirti_nagar' },
-  { id:'satguru_ram', name:'Satguru Ramsingh Marg', x:330, y:330, line:'green', interchange:false },
-  { id:'inderlok', name:'Inderlok', x:330, y:195, line:'green', interchange:true },
-  { id:'ashok_park', name:'Ashok Park Main', x:270, y:195, line:'green', interchange:false },
-  { id:'punjabi_bagh', name:'Punjabi Bagh', x:210, y:195, line:'green', interchange:false },
-  { id:'shivaji_park', name:'Shivaji Park', x:150, y:195, line:'green', interchange:false },
+  // ── Red Line (unique only) ──
+  { id:'rithala', name:'Rithala', x:80, y:165, lines:['red'] },
+  { id:'rohini_sec18', name:'Rohini Sec 18', x:130, y:165, lines:['red'] },
+  { id:'pitampura', name:'Pitampura', x:180, y:165, lines:['red'] },
+  { id:'netaji_subhash', name:'Netaji Subhash Place', x:235, y:165, lines:['red'] },
+  { id:'inderlok', name:'Inderlok', x:300, y:165, lines:['red','green'] },
+  { id:'pratap_nagar', name:'Pratap Nagar', x:345, y:165, lines:['red'] },
+  { id:'tis_hazari', name:'Tis Hazari', x:475, y:165, lines:['red'] },
+  { id:'pul_bangash', name:'Pul Bangash', x:530, y:165, lines:['red'] },
+  { id:'shastri_nagar', name:'Shastri Nagar', x:585, y:165, lines:['red'] },
+  { id:'shahdara', name:'Shahdara', x:650, y:165, lines:['red'] },
 
-  // ── Violet Line ──
-  { id:'kashmere_gate_v', name:'Kashmere Gate', x:470, y:195, line:'violet', interchange:true, alias:'kashmere_gate' },
-  { id:'lal_quila', name:'Lal Quila', x:530, y:215, line:'violet', interchange:false },
-  { id:'jama_masjid', name:'Jama Masjid', x:590, y:230, line:'violet', interchange:false },
-  { id:'ito', name:'ITO', x:620, y:260, line:'violet', interchange:false },
-  { id:'delhi_gate', name:'Delhi Gate', x:590, y:300, line:'violet', interchange:false },
-  { id:'central_sec_v', name:'Central Secretariat', x:470, y:380, line:'violet', interchange:true, alias:'central_sec' },
-  { id:'khan_market', name:'Khan Market', x:540, y:400, line:'violet', interchange:false },
-  { id:'jln_stadium', name:'JLN Stadium', x:610, y:420, line:'violet', interchange:false },
-  { id:'jorbagh', name:'Jorbagh', x:540, y:460, line:'violet', interchange:false },
-  { id:'hauz_khas_v', name:'Hauz Khas', x:470, y:480, line:'violet', interchange:true, alias:'hauz_khas' }
+  // ── Green Line (unique only) ──
+  { id:'satguru_ram', name:'Satguru Ramsingh Marg', x:280, y:230, lines:['green'] },
+  { id:'ashok_park', name:'Ashok Park Main', x:245, y:135, lines:['green'] },
+  { id:'punjabi_bagh', name:'Punjabi Bagh', x:195, y:135, lines:['green'] },
+  { id:'shivaji_park', name:'Shivaji Park', x:145, y:135, lines:['green'] },
+  { id:'mundka', name:'Mundka', x:90, y:135, lines:['green'] },
+
+  // ── Violet Line (unique only) ──
+  { id:'lal_quila', name:'Lal Quila', x:470, y:195, lines:['violet'] },
+  { id:'jama_masjid', name:'Jama Masjid', x:510, y:220, lines:['violet'] },
+  { id:'delhi_gate', name:'Delhi Gate', x:540, y:238, lines:['violet'] },
+  { id:'ito', name:'ITO', x:558, y:250, lines:['violet'] },
+  { id:'janpath', name:'Janpath', x:510, y:290, lines:['violet'] },
+  { id:'khan_market', name:'Khan Market', x:480, y:380, lines:['violet'] },
+  { id:'jln_stadium', name:'JLN Stadium', x:530, y:405, lines:['violet'] },
 ];
 
+// Mark interchange
+STATIONS.forEach(s => { s.interchange = s.lines.length > 1; });
+
+// Station lookup
+const stationMap = new Map(STATIONS.map(s => [s.id, s]));
+
 /* =============================================
-   EDGES
+   EDGES — EACH WITH LINE INFO
    ============================================= */
 const EDGES = [
   // Blue Line
-  ['dwarka_sec21','dwarka'], ['dwarka','dwarka_mor'], ['dwarka_mor','rajouri_garden'],
-  ['rajouri_garden','kirti_nagar'], ['kirti_nagar','karol_bagh'], ['karol_bagh','rajiv_chowk'],
-  ['rajiv_chowk','barakhamba'], ['barakhamba','pragati_maidan'], ['pragati_maidan','akshardham'],
-  ['akshardham','noida_sec18'],
+  { from:'dwarka_sec21', to:'dwarka', line:'blue' },
+  { from:'dwarka', to:'dwarka_mor', line:'blue' },
+  { from:'dwarka_mor', to:'rajouri_garden', line:'blue' },
+  { from:'rajouri_garden', to:'kirti_nagar', line:'blue' },
+  { from:'kirti_nagar', to:'karol_bagh', line:'blue' },
+  { from:'karol_bagh', to:'rajiv_chowk', line:'blue' },
+  { from:'rajiv_chowk', to:'barakhamba', line:'blue' },
+  { from:'barakhamba', to:'mandi_house', line:'blue' },
+  { from:'mandi_house', to:'pragati_maidan', line:'blue' },
+  { from:'pragati_maidan', to:'akshardham', line:'blue' },
+  { from:'akshardham', to:'noida_sec18', line:'blue' },
 
   // Yellow Line
-  ['samaypur_badli','azadpur'], ['azadpur','civil_lines'], ['civil_lines','kashmere_gate'],
-  ['kashmere_gate','chandni_chowk'], ['chandni_chowk','rajiv_chowk'],
-  ['rajiv_chowk','patel_chowk'], ['patel_chowk','central_sec'],
-  ['central_sec','uddyan_marg'], ['uddyan_marg','hauz_khas'], ['hauz_khas','malviya_nagar'],
+  { from:'samaypur_badli', to:'azadpur', line:'yellow' },
+  { from:'azadpur', to:'civil_lines', line:'yellow' },
+  { from:'civil_lines', to:'kashmere_gate', line:'yellow' },
+  { from:'kashmere_gate', to:'chandni_chowk', line:'yellow' },
+  { from:'chandni_chowk', to:'new_delhi', line:'yellow' },
+  { from:'new_delhi', to:'rajiv_chowk', line:'yellow' },
+  { from:'rajiv_chowk', to:'patel_chowk', line:'yellow' },
+  { from:'patel_chowk', to:'central_sec', line:'yellow' },
+  { from:'central_sec', to:'udyog_bhawan', line:'yellow' },
+  { from:'udyog_bhawan', to:'jorbagh', line:'yellow' },
+  { from:'jorbagh', to:'hauz_khas', line:'yellow' },
 
   // Red Line
-  ['rithala','rohini_sec18'], ['rohini_sec18','pitampura'], ['pitampura','kohat_enclave'],
-  ['kohat_enclave','netaji_subhash'], ['netaji_subhash','kashmere_gate'],
-  ['kashmere_gate','tis_hazari'], ['tis_hazari','pul_bangash'],
-  ['pul_bangash','pratap_nagar'], ['pratap_nagar','shastri_nagar'],
+  { from:'rithala', to:'rohini_sec18', line:'red' },
+  { from:'rohini_sec18', to:'pitampura', line:'red' },
+  { from:'pitampura', to:'netaji_subhash', line:'red' },
+  { from:'netaji_subhash', to:'inderlok', line:'red' },
+  { from:'inderlok', to:'pratap_nagar', line:'red' },
+  { from:'pratap_nagar', to:'kashmere_gate', line:'red' },
+  { from:'kashmere_gate', to:'tis_hazari', line:'red' },
+  { from:'tis_hazari', to:'pul_bangash', line:'red' },
+  { from:'pul_bangash', to:'shastri_nagar', line:'red' },
+  { from:'shastri_nagar', to:'shahdara', line:'red' },
 
   // Green Line
-  ['inderlok','ashok_park'], ['ashok_park','punjabi_bagh'], ['punjabi_bagh','shivaji_park'],
-  ['inderlok','kashmere_gate'], ['kirti_nagar','satguru_ram'],
+  { from:'kirti_nagar', to:'satguru_ram', line:'green' },
+  { from:'satguru_ram', to:'inderlok', line:'green' },
+  { from:'inderlok', to:'ashok_park', line:'green' },
+  { from:'ashok_park', to:'punjabi_bagh', line:'green' },
+  { from:'punjabi_bagh', to:'shivaji_park', line:'green' },
+  { from:'shivaji_park', to:'mundka', line:'green' },
 
   // Violet Line
-  ['kashmere_gate','lal_quila'], ['lal_quila','jama_masjid'], ['jama_masjid','ito'],
-  ['ito','delhi_gate'], ['delhi_gate','central_sec'], ['central_sec','khan_market'],
-  ['khan_market','jln_stadium'], ['kln_stadium','jorbagh'], ['jorbagh','hauz_khas'],
-
-  // Cross-line interchanges
-  ['netaji_subhash','inderlok'], ['rajouri_garden','inderlok']
+  { from:'kashmere_gate', to:'lal_quila', line:'violet' },
+  { from:'lal_quila', to:'jama_masjid', line:'violet' },
+  { from:'jama_masjid', to:'delhi_gate', line:'violet' },
+  { from:'delhi_gate', to:'ito', line:'violet' },
+  { from:'ito', to:'mandi_house', line:'violet' },
+  { from:'mandi_house', to:'janpath', line:'violet' },
+  { from:'janpath', to:'central_sec', line:'violet' },
+  { from:'central_sec', to:'khan_market', line:'violet' },
+  { from:'khan_market', to:'jln_stadium', line:'violet' },
 ];
 
 /* =============================================
    LINE METADATA
    ============================================= */
-const LINE_COLORS = {
-  blue: '#4a90d9',
-  yellow: '#ffd428',
-  red: '#e8453c',
-  green: '#5cb85c',
-  violet: '#8e44ad'
-};
-
-const LINE_NAMES = {
-  blue: 'Blue Line',
-  yellow: 'Yellow Line',
-  red: 'Red Line',
-  green: 'Green Line',
-  violet: 'Violet Line'
+const LINES = {
+  blue:   { color:'#4a90d9', name:'Blue Line' },
+  yellow: { color:'#ffd428', name:'Yellow Line' },
+  red:    { color:'#e8453c', name:'Red Line' },
+  green:  { color:'#5cb85c', name:'Green Line' },
+  violet: { color:'#9b59b6', name:'Violet Line' },
 };
 
 /* =============================================
-   HELPERS
+   BUILD GRAPH
    ============================================= */
 const SVG_NS = 'http://www.w3.org/2000/svg';
-
-function getStation(id) {
-  // Resolve aliases (shared interchange stations)
-  const s = STATIONS.find(s => s.id === id);
-  if (s && s.alias) return STATIONS.find(st => st.id === s.alias) || s;
-  return s;
-}
-
-function getStationDisplay(id) {
-  const s = STATIONS.find(s => s.id === id);
-  if (s && s.alias) return STATIONS.find(st => st.id === s.alias) || s;
-  return s;
-}
-
-// Build unified node list (deduplicate aliases)
-function getUniqueNodes() {
-  const seen = new Map();
-  STATIONS.forEach(s => {
-    const key = s.alias || s.id;
-    if (!seen.has(key)) {
-      seen.set(key, { id: key, name: s.name, x: s.x, y: s.y, line: s.line, interchange: s.interchange, lines: new Set() });
-    }
-    seen.get(key).lines.add(s.line);
-  });
-  return Array.from(seen.values());
-}
-
-function getStationLine(stationId) {
-  const s = STATIONS.find(s => s.id === stationId);
-  return s ? s.line : 'blue';
-}
-
-function resolveId(id) {
-  const s = STATIONS.find(s => s.id === id);
-  return (s && s.alias) ? s.alias : id;
-}
-
-/* =============================================
-   GRAPH STRUCTURE
-   ============================================= */
-const nodes = getUniqueNodes();
-const nodeMap = new Map(nodes.map(n => [n.id, n]));
-
-// Build edges with resolved IDs
-const uniqueEdges = new Map();
-EDGES.forEach(([a, b]) => {
-  const ra = resolveId(a), rb = resolveId(b);
-  const key = [ra, rb].sort().join('-');
-  if (!uniqueEdges.has(key) && nodeMap.has(ra) && nodeMap.has(rb)) {
-    const na = nodeMap.get(ra), nb = nodeMap.get(rb);
-    const dist = Math.round(Math.hypot(na.x - nb.x, na.y - nb.y) / 4);
-    uniqueEdges.set(key, { from: ra, to: rb, dist: Math.max(dist, 1) });
-  }
-});
-const edges = Array.from(uniqueEdges.values());
-
-// Adjacency list
 const adj = new Map();
-nodes.forEach(n => adj.set(n.id, []));
-edges.forEach(e => {
-  adj.get(e.from).push({ to: e.to, dist: e.dist });
-  adj.get(e.to).push({ to: e.from, dist: e.dist });
+STATIONS.forEach(s => adj.set(s.id, []));
+
+// Compute weights and build adjacency
+EDGES.forEach(e => {
+  const a = stationMap.get(e.from), b = stationMap.get(e.to);
+  const dist = Math.max(Math.round(Math.hypot(a.x - b.x, a.y - b.y) / 5), 1);
+  adj.get(e.from).push({ to: e.to, dist, line: e.line });
+  adj.get(e.to).push({ to: e.from, dist, line: e.line });
 });
 
+// Edge lookup helper
+function findEdge(a, b) {
+  return EDGES.find(e =>
+    (e.from === a && e.to === b) || (e.from === b && e.to === a)
+  );
+}
+
+function sub(n) { const s='₀₁₂₃₄₅₆₇₈₉'; return String(n).split('').map(d=>s[+d]).join(''); }
+
 /* =============================================
-   DOM REFS
+   DOM
    ============================================= */
 const svg = document.getElementById('metroMap');
 const edgesG = document.getElementById('edgesG');
 const pathG = document.getElementById('pathG');
 const nodesG = document.getElementById('nodesG');
+const legendG = document.getElementById('legendG');
 const sourceSelect = document.getElementById('sourceSelect');
 const destSelect = document.getElementById('destSelect');
 const findPathBtn = document.getElementById('findPathBtn');
 const resetBtn = document.getElementById('resetBtn');
+const randomBtn = document.getElementById('randomBtn');
 const pathOutput = document.getElementById('pathOutput');
+const analysisOutput = document.getElementById('analysisOutput');
+const pathCard = document.getElementById('pathCard');
+const analysisCard = document.getElementById('analysisCard');
 const stationInfo = document.getElementById('stationInfo');
+const propsGrid = document.getElementById('propsGrid');
+const detectedProps = document.getElementById('detectedProps');
+const conceptsList = document.getElementById('conceptsList');
+
+let hoveredStation = null;
 
 /* =============================================
    RENDER MAP
    ============================================= */
 function renderMap() {
-  // Draw edges
-  edges.forEach(e => {
-    const na = nodeMap.get(e.from), nb = nodeMap.get(e.to);
+  // Draw edges — each colored by its metro line
+  EDGES.forEach(e => {
+    const a = stationMap.get(e.from), b = stationMap.get(e.to);
     const line = document.createElementNS(SVG_NS, 'line');
-    line.setAttribute('x1', na.x); line.setAttribute('y1', na.y);
-    line.setAttribute('x2', nb.x); line.setAttribute('y2', nb.y);
-    const color = LINE_COLORS[na.line] || LINE_COLORS[na.lines ? [...na.lines][0] : 'blue'];
-    line.setAttribute('stroke', color);
+    line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
+    line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
+    line.setAttribute('stroke', LINES[e.line].color);
     line.classList.add('metro-edge');
-    line.dataset.from = e.from; line.dataset.to = e.to;
+    line.dataset.from = e.from; line.dataset.to = e.to; line.dataset.line = e.line;
     edgesG.appendChild(line);
   });
 
   // Draw nodes
-  nodes.forEach(n => {
+  STATIONS.forEach(n => {
     const g = document.createElementNS(SVG_NS, 'g');
-    g.classList.add('station-node');
-    g.dataset.id = n.id;
+    g.classList.add('station-node'); g.dataset.id = n.id;
 
-    const r = n.interchange ? 7 : 4.5;
+    const r = n.interchange ? 7 : 4;
     const c = document.createElementNS(SVG_NS, 'circle');
     c.setAttribute('cx', n.x); c.setAttribute('cy', n.y); c.setAttribute('r', r);
-    const color = n.lines.size > 1 ? '#ffffff' : LINE_COLORS[[...n.lines][0]];
-    c.setAttribute('fill', color);
-    c.setAttribute('stroke', n.interchange ? '#ffffff' : 'none');
-    c.setAttribute('stroke-width', n.interchange ? '1.5' : '0');
-    c.classList.add('station-marker');
+    c.setAttribute('fill', n.interchange ? '#ffffff' : LINES[n.lines[0]].color);
+    if (n.interchange) {
+      c.setAttribute('stroke', '#ffffff'); c.setAttribute('stroke-width', '2');
+      c.setAttribute('fill', '#08080c');
+    }
 
     const t = document.createElementNS(SVG_NS, 'text');
-    t.setAttribute('x', n.x);
-    t.setAttribute('y', n.y - (r + 4));
+    t.setAttribute('x', n.x); t.setAttribute('y', n.y - (r + 4));
     t.setAttribute('text-anchor', 'middle');
     t.classList.add('station-label');
-    if (n.interchange) t.classList.add('visible');
+    if (n.interchange) t.classList.add('interchange-label');
     t.textContent = n.name;
 
     g.appendChild(c); g.appendChild(t);
     nodesG.appendChild(g);
 
-    // Events
-    g.addEventListener('mouseenter', () => showStationInfo(n));
-    g.addEventListener('mouseleave', () => clearStationInfo());
+    g.addEventListener('mouseenter', () => { hoveredStation = n; showStationInfo(n); });
+    g.addEventListener('mouseleave', () => { hoveredStation = null; clearStationInfo(); });
     g.addEventListener('click', () => selectStation(n.id));
+  });
+
+  // Draw legend
+  const lineKeys = Object.keys(LINES);
+  lineKeys.forEach((key, i) => {
+    const x = i * 150;
+    const bar = document.createElementNS(SVG_NS, 'rect');
+    bar.setAttribute('x', x); bar.setAttribute('y', 0);
+    bar.setAttribute('width', 20); bar.setAttribute('height', 4);
+    bar.setAttribute('rx', 2); bar.setAttribute('fill', LINES[key].color);
+    legendG.appendChild(bar);
+
+    const txt = document.createElementNS(SVG_NS, 'text');
+    txt.setAttribute('x', x + 26); txt.setAttribute('y', 5);
+    txt.setAttribute('font-family', 'IBM Plex Mono, monospace');
+    txt.setAttribute('font-size', '9'); txt.setAttribute('fill', '#555568');
+    txt.textContent = LINES[key].name;
+    legendG.appendChild(txt);
   });
 }
 
@@ -251,229 +253,294 @@ function renderMap() {
    POPULATE SELECTS
    ============================================= */
 function populateSelects() {
-  const sorted = [...nodes].sort((a, b) => a.name.localeCompare(b.name));
+  const sorted = [...STATIONS].sort((a, b) => a.name.localeCompare(b.name));
   sorted.forEach(n => {
-    const o1 = new Option(n.name, n.id);
-    const o2 = new Option(n.name, n.id);
-    sourceSelect.appendChild(o1);
-    destSelect.appendChild(o2);
+    sourceSelect.appendChild(new Option(n.name, n.id));
+    destSelect.appendChild(new Option(n.name, n.id));
   });
 }
 
 /* =============================================
-   STATION INFO BAR
+   STATION INTERACTION
    ============================================= */
 function showStationInfo(n) {
-  const lineColors = [...n.lines].map(l => `<span class="info-tag" style="color:${LINE_COLORS[l]};background:${LINE_COLORS[l]}15;border:1px solid ${LINE_COLORS[l]}30;">${LINE_NAMES[l]}</span>`).join(' ');
+  const deg = adj.get(n.id).length;
+  const lineTags = n.lines.map(l =>
+    `<span class="info-tag" style="color:${LINES[l].color};background:${LINES[l].color}15;border:1px solid ${LINES[l].color}30;">${LINES[l].name}</span>`
+  ).join(' ');
   const typeTag = n.interchange
-    ? `<span class="info-tag" style="color:var(--accent);background:var(--accent-dim);border:1px solid rgba(0,229,160,0.2);">INTERCHANGE</span>`
-    : `<span class="info-tag" style="color:var(--text-muted);background:var(--surface-2);border:1px solid var(--border);">STATION</span>`;
+    ? `<span class="info-tag" style="color:var(--accent);background:var(--accent-dim);border:1px solid rgba(0,229,160,0.25);">INTERCHANGE (Degree ${deg})</span>`
+    : `<span class="info-tag" style="color:var(--text-muted);background:var(--surface-2);border:1px solid var(--border);">Degree ${deg}</span>`;
 
   stationInfo.innerHTML = `
     <div class="info-stat">
-      <span class="info-dot" style="background:${n.lines.size > 1 ? '#fff' : LINE_COLORS[[...n.lines][0]]}"></span>
+      <span class="info-dot" style="background:${n.interchange ? '#fff' : LINES[n.lines[0]].color}"></span>
       <span class="info-value">${n.name}</span>
     </div>
-    ${typeTag}
-    ${lineColors}
-    <span class="info-label">Edges: ${adj.get(n.id).length}</span>
+    ${typeTag} ${lineTags}
   `;
 }
 
 function clearStationInfo() {
-  stationInfo.innerHTML = `<span class="info-empty">Hover or click a station on the map</span>`;
+  stationInfo.innerHTML = `<span class="info-empty">Hover over a station to see details · Click to select</span>`;
 }
 
 function selectStation(id) {
-  if (!sourceSelect.value) sourceSelect.value = id;
-  else if (!destSelect.value) destSelect.value = id;
+  if (!sourceSelect.value) { sourceSelect.value = id; }
+  else if (!destSelect.value && sourceSelect.value !== id) { destSelect.value = id; }
+  else { sourceSelect.value = id; destSelect.value = ''; }
 }
 
 /* =============================================
-   DIJKSTRA'S SHORTEST PATH
+   DIJKSTRA'S ALGORITHM
    ============================================= */
 function dijkstra(src, dst) {
-  const dist = new Map(), prev = new Map(), visited = new Set();
-  nodes.forEach(n => dist.set(n.id, Infinity));
+  const dist = new Map(), prev = new Map(), prevEdge = new Map(), visited = new Set();
+  STATIONS.forEach(s => dist.set(s.id, Infinity));
   dist.set(src, 0);
 
   while (true) {
     let u = null, min = Infinity;
-    for (const [id, d] of dist) {
-      if (!visited.has(id) && d < min) { min = d; u = id; }
-    }
+    for (const [id, d] of dist) { if (!visited.has(id) && d < min) { min = d; u = id; } }
     if (u === null || u === dst) break;
     visited.add(u);
     adj.get(u).forEach(({ to, dist: w }) => {
       const alt = dist.get(u) + w;
-      if (alt < dist.get(to)) { dist.set(to, alt); prev.set(to, u); }
+      if (alt < dist.get(to)) { dist.set(to, alt); prev.set(to, u); prevEdge.set(to, { line: findEdge(u, to).line }); }
     });
   }
 
   if (dist.get(dst) === Infinity) return null;
-  const path = []; let cur = dst;
-  while (cur) { path.unshift(cur); cur = prev.get(cur); }
-  return { path, distance: dist.get(dst) };
+  const path = []; const edgeLines = []; let cur = dst;
+  while (cur) { path.unshift(cur); if (prevEdge.has(cur)) edgeLines.unshift(prevEdge.get(cur).line); cur = prev.get(cur); }
+  return { path, distance: dist.get(dst), edgeLines };
 }
 
 /* =============================================
    FIND PATH
    ============================================= */
-let selectedPath = null;
-
 function findPath() {
   const src = sourceSelect.value, dst = destSelect.value;
-  if (!src || !dst) { pathOutput.innerHTML = `<p class="path-empty">Please select both stations.</p>`; return; }
-  if (src === dst) { pathOutput.innerHTML = `<p class="path-empty">Source and destination are the same.</p>`; return; }
+  if (!src || !dst) return;
+  if (src === dst) return;
 
   clearPath();
   const result = dijkstra(src, dst);
-  if (!result) { pathOutput.innerHTML = `<p class="path-empty">No path found.</p>`; return; }
+  if (!result) return;
 
-  selectedPath = result;
-  drawPath(result.path);
+  drawPath(result.path, result.edgeLines);
   showPathStats(result);
+  showPathAnalysis(result);
 }
 
 function clearPath() {
   pathG.innerHTML = '';
   edgesG.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
-  selectedPath = null;
+  pathCard.style.display = 'none';
+  analysisCard.style.display = 'none';
 }
 
 /* =============================================
    DRAW PATH ON MAP
    ============================================= */
-function drawPath(path) {
-  // Draw glow
+function drawPath(path, edgeLines) {
+  // Glow + line segments colored by metro line
   for (let i = 0; i < path.length - 1; i++) {
-    const a = nodeMap.get(path[i]), b = nodeMap.get(path[i + 1]);
+    const a = stationMap.get(path[i]), b = stationMap.get(path[i + 1]);
+    const color = LINES[edgeLines[i]].color;
+
     const glow = document.createElementNS(SVG_NS, 'line');
     glow.setAttribute('x1', a.x); glow.setAttribute('y1', a.y);
     glow.setAttribute('x2', b.x); glow.setAttribute('y2', b.y);
     glow.setAttribute('stroke', '#00e5a0');
     glow.classList.add('path-glow');
+    glow.style.animationDelay = (i * 0.08) + 's';
     pathG.appendChild(glow);
 
     const line = document.createElementNS(SVG_NS, 'line');
     line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
     line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
-    line.setAttribute('stroke', '#00e5a0');
+    line.setAttribute('stroke', color);
     line.classList.add('path-line');
+    line.style.opacity = '0'; line.style.transition = `opacity .4s ${i * 0.06}s`;
     pathG.appendChild(line);
+    requestAnimationFrame(() => { line.style.opacity = '1'; });
   }
 
-  // Draw path station markers
-  path.forEach(pid => {
-    const n = nodeMap.get(pid);
-    const c = document.createElementNS(SVG_NS, 'circle');
-    c.setAttribute('cx', n.x); c.setAttribute('cy', n.y);
-    c.setAttribute('r', n.interchange ? 8 : 5.5);
-    c.setAttribute('fill', '#00e5a0');
-    c.setAttribute('stroke', '#08080c'); c.setAttribute('stroke-width', '2');
-    c.classList.add('path-station');
-    pathG.appendChild(c);
+  // Station rings on path
+  path.forEach((pid, i) => {
+    const n = stationMap.get(pid);
+    const ring = document.createElementNS(SVG_NS, 'circle');
+    ring.setAttribute('cx', n.x); ring.setAttribute('cy', n.y);
+    ring.setAttribute('r', n.interchange ? 9 : 6);
+    ring.setAttribute('fill', 'none'); ring.setAttribute('stroke', '#00e5a0');
+    ring.setAttribute('stroke-width', '2'); ring.setAttribute('opacity', '0.5');
+    ring.style.transition = `opacity .3s ${i * 0.05}s`;
+    ring.style.opacity = '0';
+    pathG.appendChild(ring);
+    requestAnimationFrame(() => { ring.style.opacity = '0.5'; });
   });
 
-  // Highlight edges on main layer
+  // Highlight edges
   for (let i = 0; i < path.length - 1; i++) {
-    const key = [path[i], path[i + 1]].sort().join('-');
+    const key1 = path[i], key2 = path[i + 1];
     edgesG.querySelectorAll('.metro-edge').forEach(el => {
-      const eKey = [el.dataset.from, el.dataset.to].sort().join('-');
-      if (eKey === key) el.classList.add('highlight');
+      if ((el.dataset.from === key1 && el.dataset.to === key2) || (el.dataset.from === key2 && el.dataset.to === key1)) {
+        el.classList.add('highlight');
+      }
     });
   }
 }
 
 /* =============================================
-   PATH STATISTICS UI
+   PATH STATISTICS
    ============================================= */
 function showPathStats(result) {
-  const { path, distance } = result;
-  const interchanges = countInterchanges(path);
+  const { path, distance, edgeLines } = result;
 
-  let stepsHTML = path.map((pid, i) => {
-    const n = nodeMap.get(pid);
-    const isFirst = i === 0, isLast = i === path.length - 1;
-    let lineColor = '#00e5a0';
-    if (i < path.length - 1) {
-      const a = nodeMap.get(path[i]), b = nodeMap.get(path[i + 1]);
-      const shared = [...a.lines].find(l => b.lines.has(l));
-      if (shared) lineColor = LINE_COLORS[shared];
+  // Detect interchanges along path
+  const interchanges = [];
+  let currentLine = edgeLines[0] || 'blue';
+  for (let i = 1; i < edgeLines.length; i++) {
+    if (edgeLines[i] !== currentLine) {
+      interchanges.push({ station: path[i], from: currentLine, to: edgeLines[i] });
+      currentLine = edgeLines[i];
     }
-    const connector = !isLast ? `<div class="step-connector" style="background:${lineColor};"></div>` : '';
+  }
+
+  const linesUsed = [...new Set(edgeLines)];
+
+  let stepsHTML = '';
+  let prevLine = null;
+  path.forEach((pid, i) => {
+    const n = stationMap.get(pid);
+    const isFirst = i === 0, isLast = i === path.length - 1;
+    const edgeLine = i < edgeLines.length ? edgeLines[i] : prevLine;
+    const lineColor = edgeLine ? LINES[edgeLine].color : '#00e5a0';
+    const isInterchange = interchanges.find(ic => ic.station === pid);
+
+    if (edgeLine) prevLine = edgeLine;
 
     let detail = '';
     if (isFirst) detail = 'START';
-    else if (isLast) detail = 'END';
-    else if (n.interchange) detail = 'INTERCHANGE';
+    else if (isLast) detail = 'DESTINATION';
+    else if (isInterchange) detail = `INTERCHANGE \u2192 ${LINES[isInterchange.to].name}`;
 
-    return `
+    const lineTag = (edgeLine && (isFirst || isInterchange))
+      ? `<span class="step-line-tag" style="color:${LINES[edgeLine].color};background:${LINES[edgeLine].color}15;border:1px solid ${LINES[edgeLine].color}25;">${LINES[edgeLine].name}</span>` : '';
+
+    stepsHTML += `
       <div class="step">
-        <div class="step-dot" style="border-color:${lineColor};background:${isFirst||isLast?'var(--accent)':'transparent'}"></div>
+        <div class="step-dot" style="border-color:${lineColor};background:${isFirst||isLast?'var(--accent)':'transparent'};"></div>
         <div class="step-info">
           <div class="step-name">${n.name}</div>
           ${detail ? `<div class="step-detail">${detail}</div>` : ''}
+          ${lineTag}
         </div>
       </div>
-      ${connector}
+      ${!isLast ? `<div class="step-connector" style="background:${i < edgeLines.length ? LINES[edgeLines[i]].color : lineColor};"></div>` : ''}
     `;
-  }).join('');
+  });
 
+  pathCard.style.display = 'block';
   pathOutput.innerHTML = `
     <div class="path-summary">
-      <div class="path-stat">
-        <span class="p-val">${path.length}</span>
-        <span class="p-lbl">Stations</span>
-      </div>
-      <div class="path-stat">
-        <span class="p-val">${distance}</span>
-        <span class="p-lbl">Distance</span>
-      </div>
-      <div class="path-stat">
-        <span class="p-val">${interchanges}</span>
-        <span class="p-lbl">Interchanges</span>
-      </div>
-      <div class="path-stat">
-        <span class="p-val">${Math.round(distance * 0.4)}</span>
-        <span class="p-lbl">Est. Min</span>
-      </div>
+      <div class="path-stat"><span class="p-val">${path.length}</span><span class="p-lbl">Stations</span></div>
+      <div class="path-stat"><span class="p-val">${distance}</span><span class="p-lbl">Distance</span></div>
+      <div class="path-stat"><span class="p-val">${interchanges.length}</span><span class="p-lbl">Interchanges</span></div>
+      <div class="path-stat"><span class="p-val">${Math.round(distance * 0.4)}</span><span class="p-lbl">Est. Min</span></div>
     </div>
     <div class="path-steps">${stepsHTML}</div>
   `;
 }
 
-function countInterchanges(path) {
-  let count = 0;
-  for (let i = 1; i < path.length - 1; i++) {
-    const prev = nodeMap.get(path[i - 1]), cur = nodeMap.get(path[i]);
-    const prevLines = [...prev.lines], curLines = [...cur.lines];
-    if (!prevLines.some(l => curLines.includes(l))) count++;
+/* =============================================
+   PATH GRAPH ANALYSIS — "WHICH GRAPH IS THIS?"
+   ============================================= */
+function showPathAnalysis(result) {
+  const { path, edgeLines } = result;
+  const n = path.length;
+  const e = n - 1;
+  const linesUsed = [...new Set(edgeLines)];
+
+  const interchanges = [];
+  let curLine = edgeLines[0];
+  for (let i = 1; i < edgeLines.length; i++) {
+    if (edgeLines[i] !== curLine) {
+      interchanges.push({ station: stationMap.get(path[i]).name, from: curLine, to: edgeLines[i] });
+      curLine = edgeLines[i];
+    }
   }
-  return count;
+
+  const props = [
+    { label: `Path Graph P${sub(n)}`, type: 'yes' },
+    { label: 'Connected', type: 'yes' },
+    { label: 'Acyclic', type: 'yes' },
+    { label: 'Tree', type: 'yes' },
+    { label: 'Bipartite', type: 'yes' },
+    { label: 'Planar', type: 'yes' },
+    { label: `Weighted (${e} edges)`, type: 'info' },
+    { label: `${linesUsed.length} Line${linesUsed.length > 1 ? 's' : ''}`, type: 'info' },
+  ];
+
+  const linesHTML = linesUsed.map(l =>
+    `<div class="analysis-line-item"><div class="analysis-line-bar" style="background:${LINES[l].color};"></div>${LINES[l].name}</div>`
+  ).join('');
+
+  const interHTML = interchanges.length
+    ? interchanges.map(ic =>
+        `<div class="analysis-line-item"><div class="analysis-line-bar" style="background:var(--accent);"></div>${ic.station}: ${LINES[ic.from].name} → ${LINES[ic.to].name}</div>`
+      ).join('')
+    : '<div class="analysis-line-item" style="color:var(--text-muted);">No interchanges needed</div>';
+
+  analysisCard.style.display = 'block';
+  analysisOutput.innerHTML = `
+    <div class="analysis-type">Path Graph P${sub(n)}</div>
+    <div class="analysis-sub">
+      Your route with <strong>${n} vertices</strong> (stations) and <strong>${e} edges</strong> (connections) forms a <strong>Path Graph</strong> — a connected, acyclic, planar graph where each internal vertex has degree 2 and endpoints have degree 1. This is also a <strong>tree</strong> (connected + acyclic), and all trees are <strong>bipartite</strong>.
+    </div>
+    <div class="analysis-props">${props.map(p => `<span class="analysis-tag ${p.type}">${p.label}</span>`).join('')}</div>
+    <div class="analysis-lines">
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;font-weight:600;">LINES TRAVERSED</div>
+      ${linesHTML}
+    </div>
+    <div class="analysis-lines" style="margin-top:10px;">
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;font-weight:600;">INTERCHANGES</div>
+      ${interHTML}
+    </div>
+  `;
 }
 
 /* =============================================
-   GRAPH PROPERTIES PANEL
+   NETWORK PROPERTIES
    ============================================= */
-function updateGraphProps() {
-  document.getElementById('mpV').textContent = nodes.length;
-  document.getElementById('mpE').textContent = edges.length;
+function updateNetworkProps() {
+  const V = STATIONS.length, E = EDGES.length;
   const lineSet = new Set();
-  nodes.forEach(n => n.lines.forEach(l => lineSet.add(l)));
-  document.getElementById('mpLines').textContent = lineSet.size;
-  document.getElementById('mpInt').textContent = nodes.filter(n => n.interchange).length;
+  STATIONS.forEach(s => s.lines.forEach(l => lineSet.add(l)));
+  const interchangeCount = STATIONS.filter(s => s.interchange).length;
 
-  // Detected properties
-  const props = [];
-  props.push('Connected');
-  if (nodes.filter(n => !n.interchange).length > 0) props.push('Weighted');
+  const maxDeg = Math.max(...STATIONS.map(s => adj.get(s.id).length));
+  const interchangeMax = STATIONS.find(s => adj.get(s.id).length === maxDeg);
+
+  propsGrid.innerHTML = `
+    <div class="mini-prop"><span class="mini-val">${V}</span><span class="mini-lbl">Vertices</span></div>
+    <div class="mini-prop"><span class="mini-val">${E}</span><span class="mini-lbl">Edges</span></div>
+    <div class="mini-prop"><span class="mini-val">${lineSet.size}</span><span class="mini-lbl">Lines</span></div>
+    <div class="mini-prop"><span class="mini-val">${interchangeCount}</span><span class="mini-lbl">Interchanges</span></div>
+  `;
+
+  const avgDeg = (E * 2 / V).toFixed(1);
+  const props = [
+    'Connected', 'Weighted', `Avg Degree ${avgDeg}`,
+    `Max Degree ${maxDeg}`, 'Planar', 'Cyclic'
+  ];
 
   // Check bipartiteness
-  const col = new Map();
-  let isBip = true;
-  nodes.forEach(n => { if (!col.has(n.id)) {
-    col.set(n.id, 0); const q = [n.id];
+  const col = new Map(); let isBip = true;
+  for (const s of STATIONS) {
+    if (col.has(s.id)) continue;
+    col.set(s.id, 0); const q = [s.id];
     while (q.length && isBip) {
       const c = q.shift();
       adj.get(c).forEach(({ to }) => {
@@ -481,55 +548,60 @@ function updateGraphProps() {
         else if (col.get(to) === col.get(c)) isBip = false;
       });
     }
-  }});
-  if (isBip) props.push('Bipartite');
+  }
+  if (isBip) props.splice(3, 0, 'Bipartite');
 
-  props.push('Planar');
+  detectedProps.innerHTML = props.map(p => `<span class="prop-tag">${p}</span>`).join('');
 
-  const avgDeg = (edges.length * 2 / nodes.length).toFixed(1);
-  props.push(`Avg Degree ${avgDeg}`);
-
-  document.getElementById('detectedProps').innerHTML = props.map(p =>
-    `<span class="prop-tag">${p}</span>`
-  ).join('');
-
-  // Concepts list
-  document.getElementById('conceptsList').innerHTML = `
+  conceptsList.innerHTML = `
     <div class="concept-item">
       <div class="concept-icon"><svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3" fill="#00e5a0"/></svg></div>
-      <div class="concept-text"><strong>Vertices = Stations:</strong> Each metro station is a vertex in the graph. The DMRC network has ${nodes.length} stations represented.</div>
+      <div class="concept-text"><strong>Vertices = Stations:</strong> Each of the ${V} metro stations is a vertex. Interchange stations like <strong>Kashmere Gate</strong> (degree ${adj.get('kashmere_gate').length}) have the highest degrees because multiple lines converge there.</div>
     </div>
     <div class="concept-item">
       <div class="concept-icon"><svg viewBox="0 0 10 10"><line x1="1" y1="9" x2="9" y2="1" stroke="#00e5a0" stroke-width="1.5"/></svg></div>
-      <div class="concept-text"><strong>Edges = Tracks:</strong> Each connection between adjacent stations is an edge. There are ${edges.length} edges with weights (distances).</div>
+      <div class="concept-text"><strong>Edges = Track Segments:</strong> ${E} edges connect adjacent stations. Each edge carries a <strong>weight</strong> (distance), making this a <strong>Weighted Graph</strong>.</div>
     </div>
     <div class="concept-item">
       <div class="concept-icon"><svg viewBox="0 0 10 10"><circle cx="5" cy="3" r="2" fill="#00e5a0"/><circle cx="3" cy="7" r="2" fill="#00e5a0"/><circle cx="7" cy="7" r="2" fill="#00e5a0"/></svg></div>
-      <div class="concept-text"><strong>Connected Graph:</strong> You can reach any station from any other station — the network is a single connected component.</div>
+      <div class="concept-text"><strong>Connected Graph:</strong> Any station can reach any other station — the network forms a single connected component. This is essential for public transit.</div>
     </div>
     <div class="concept-item">
-      <div class="concept-icon"><svg viewBox="0 0 10 10"><text x="5" y="7" text-anchor="middle" fill="#00e5a0" font-size="7" font-weight="bold">W</text></svg></div>
-      <div class="concept-text"><strong>Weighted Graph:</strong> Each edge carries a numerical weight representing the distance between stations. Dijkstra's algorithm uses these weights to find the shortest path.</div>
+      <div class="concept-icon"><svg viewBox="0 0 10 10"><rect x="2" y="2" width="6" height="6" fill="none" stroke="#00e5a0" stroke-width="1.2"/><line x1="2" y1="2" x2="8" y2="8" stroke="#00e5a0" stroke-width="0.8"/></svg></div>
+      <div class="concept-text"><strong>Cyclic Graph:</strong> The network contains multiple cycles — you can take different routes between stations (e.g., Rajiv Chowk → Kashmere Gate via Yellow or via Blue+Red). This is what makes pathfinding meaningful.</div>
     </div>
     <div class="concept-item">
-      <div class="concept-icon"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" fill="none" stroke="#00e5a0" stroke-width="1"/></svg></div>
-      <div class="concept-text"><strong>Interchange Nodes:</strong> ${nodes.filter(n=>n.interchange).length} stations like Rajiv Chowk and Kashmere Gate are interchange hubs — they have higher degree (more connections) and are critical for network connectivity.</div>
+      <div class="concept-icon"><svg viewBox="0 0 10 10"><text x="5" y="7" text-anchor="middle" fill="#00e5a0" font-size="6" font-weight="bold">D</text></svg></div>
+      <div class="concept-text"><strong>Dijkstra's Algorithm:</strong> Select two stations above — the algorithm finds the minimum-distance path through this ${V}-vertex graph, the same principle used by the DMRC app and Google Maps.</div>
     </div>
     <div class="concept-item">
-      <div class="concept-icon"><svg viewBox="0 0 10 10"><line x1="1" y1="9" x2="9" y2="1" stroke="#00e5a0" stroke-width="1.5"/><circle cx="1" cy="9" r="1.5" fill="#00e5a0"/><circle cx="9" cy="1" r="1.5" fill="#00e5a0"/></svg></div>
-      <div class="concept-text"><strong>Shortest Path (Dijkstra):</strong> Select two stations above and click "Find Shortest Path" — the algorithm finds the minimum-distance route through the network, the same principle used in Google Maps and DMRC journey planners.</div>
+      <div class="concept-icon"><svg viewBox="0 0 10 10"><path d="M2,8 L5,2 L8,8" fill="none" stroke="#00e5a0" stroke-width="1.2"/></svg></div>
+      <div class="concept-text"><strong>Interchange Nodes:</strong> ${interchangeCount} stations serve as interchanges. In graph terms, they are <strong>cut vertices</strong> — removing one would disconnect parts of the network.</div>
     </div>
   `;
 }
 
 /* =============================================
-   EVENT LISTENERS
+   EVENTS
    ============================================= */
 findPathBtn.addEventListener('click', findPath);
 resetBtn.addEventListener('click', () => {
   sourceSelect.value = ''; destSelect.value = '';
   clearPath();
-  pathOutput.innerHTML = `<p class="path-empty">Select two stations and find a path to see route details.</p>`;
+});
+randomBtn.addEventListener('click', () => {
+  const ids = STATIONS.map(s => s.id);
+  const a = ids[Math.floor(Math.random() * ids.length)];
+  let b = a; while (b === a) b = ids[Math.floor(Math.random() * ids.length)];
+  sourceSelect.value = a; destSelect.value = b;
+  findPath();
+});
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+  if (e.key === 'Enter') findPath();
+  if (e.key === 'r' || e.key === 'R') { sourceSelect.value = ''; destSelect.value = ''; clearPath(); }
 });
 
 /* =============================================
@@ -538,7 +610,7 @@ resetBtn.addEventListener('click', () => {
 function init() {
   renderMap();
   populateSelects();
-  updateGraphProps();
+  updateNetworkProps();
 }
 
 document.addEventListener('DOMContentLoaded', init);
