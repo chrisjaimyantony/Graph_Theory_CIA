@@ -63,6 +63,14 @@ const MODULES = [
       { question: "How is a directed graph different from an undirected graph?", options: ["Directed graphs have more vertices", "Undirected graphs always have weights", "Directed edges have direction; undirected edges do not", "There is no real difference"], answer: 2 },
       { question: "True or False: A trivial graph is also a null graph.", options: ["True", "False"], answer: 0 },
       { question: "Which graph type is best for representing one-way streets?", options: ["Undirected graph", "Null graph", "Directed graph", "Trivial graph"], answer: 2 }
+    ],
+    references: [
+      { title: "Graph Theory (5th ed.)", author: "Diestel, R. (2017)", publisher: "Springer", chapter: "Chapter 1: The Basics" },
+      { title: "Introduction to Graph Theory (2nd ed.)", author: "West, D.B. (2001)", publisher: "Pearson", chapter: "Chapter 1: Basic Concepts" },
+      { title: "Graph Theory", author: "Bondy, J.A. & Murty, U.S.R. (2008)", publisher: "Springer", chapter: "Chapter 1: Graphs and Subgraphs" },
+      { title: "Graph Data Structure", author: "GeeksforGeeks", publisher: "geeksforgeeks.org", chapter: "Introduction to Graph Data Structure" },
+      { title: "Graph Theory Basics", author: "TutorialsPoint", publisher: "tutorialspoint.com", chapter: "Graph Theory — Basics" },
+      { title: "Graph (Mathematics)", author: "Wikipedia", publisher: "en.wikipedia.org", chapter: "Definitions and Basic Terminology" }
     ]
   },
   {
@@ -131,18 +139,27 @@ const MODULES = [
       { question: "True or False: Every complete graph is also a regular graph.", options: ["True", "False"], answer: 0 },
       { question: "Which type of graph is commonly used to model hierarchical relationships?", options: ["Complete graph", "Cyclic graph", "Tree", "Multi-graph"], answer: 2 },
       { question: "A graph that is both connected and acyclic is called:", options: ["A complete graph", "A regular graph", "A tree", "A wheel graph"], answer: 2 }
+    ],
+    references: [
+      { title: "Graph Theory (5th ed.)", author: "Diestel, R. (2017)", publisher: "Springer", chapter: "Chapters 1\u20132: Connectivity and Trees" },
+      { title: "Graph Theory", author: "Bondy, J.A. & Murty, U.S.R. (2008)", publisher: "Springer", chapter: "Chapter 4: Trees, Connectivity, and Planarity" },
+      { title: "Introduction to Graph Theory (2nd ed.)", author: "West, D.B. (2001)", publisher: "Pearson", chapter: "Chapters 2\u20133: Trees, Connectivity, and Cycles" },
+      { title: "Graph Theory", author: "Harary, F. (1969)", publisher: "Addison-Wesley", chapter: "Chapter 2: Graphs and Digraphs" },
+      { title: "Connectivity (Graph Theory)", author: "Wikipedia", publisher: "en.wikipedia.org", chapter: "Connected Vertices and Graphs" },
+      { title: "Types of Graphs", author: "GeeksforGeeks", publisher: "geeksforgeeks.org", chapter: "Types of Graphs in Graph Theory" },
+      { title: "Complete Graph", author: "Wolfram MathWorld", publisher: "mathworld.wolfram.com", chapter: "Complete Graph \u2014 Properties and Formulas" }
     ]
   },
   {
     id: 3,
     tag: "Module 03",
     title: "Advanced & Specialized",
-    description: "Dive into specialized graph types that power everything from network design to computer architecture — bipartite graphs, planarity, and beyond.",
+    description: "Dive into specialized graph types that power everything from network design to computer architecture \u2014 bipartite graphs, planarity, and beyond.",
     videoId: "UWMpqhL6tbk",
     graphs: [
       {
         name: "Bipartite Graph",
-        definition: "A graph whose vertices can be split into two disjoint sets, with every edge connecting a vertex from one set to a vertex in the other — never within the same set.",
+        definition: "A graph whose vertices can be split into two disjoint sets, with every edge connecting a vertex from one set to a vertex in the other \u2014 never within the same set.",
         svg: `<svg viewBox="0 0 120 80"><line x1="25" y1="18" x2="88" y2="22" stroke="#00e5a0" stroke-width="1.2" opacity="0.4"/><line x1="25" y1="18" x2="88" y2="50" stroke="#00e5a0" stroke-width="1.2" opacity="0.4"/><line x1="25" y1="48" x2="88" y2="22" stroke="#00e5a0" stroke-width="1.2" opacity="0.4"/><line x1="25" y1="48" x2="88" y2="65" stroke="#00e5a0" stroke-width="1.2" opacity="0.4"/><line x1="25" y1="68" x2="88" y2="50" stroke="#00e5a0" stroke-width="1.2" opacity="0.4"/><circle cx="25" cy="18" r="3.5" fill="#00e5a0"/><circle cx="25" cy="48" r="3.5" fill="#00e5a0"/><circle cx="25" cy="68" r="3.5" fill="#00e5a0"/><circle cx="88" cy="22" r="3.5" fill="#00e5a0"/><circle cx="88" cy="50" r="3.5" fill="#00e5a0"/><circle cx="88" cy="65" r="3.5" fill="#00e5a0"/></svg>`
       },
       {
@@ -184,6 +201,16 @@ const MODULES = [
       { question: "True or False: Every tree is a planar graph.", options: ["True", "False"], answer: 0 },
       { question: "Which graph type naturally models a multi-dimensional cube?", options: ["Bipartite graph", "Hypercube graph", "Wheel graph", "Planar graph"], answer: 1 },
       { question: "A hypercube Q\u2083 looks like:", options: ["A square", "A cube", "A triangle", "A star"], answer: 1 }
+    ],
+    references: [
+      { title: "Graph Theory (5th ed.)", author: "Diestel, R. (2017)", publisher: "Springer", chapter: "Chapter 4: Planar Graphs" },
+      { title: "Graph Theory", author: "Bondy, J.A. & Murty, U.S.R. (2008)", publisher: "Springer", chapter: "Chapter 10: Planar Graphs" },
+      { title: "Introduction to Graph Theory (2nd ed.)", author: "West, D.B. (2001)", publisher: "Pearson", chapter: "Chapter 6: Planar Graphs" },
+      { title: "Introduction to Algorithms (3rd ed.)", author: "Cormen, T.H., Leiserson, C.E., Rivest, R.L. & Stein, C. (2009)", publisher: "MIT Press", chapter: "Chapter 22: Elementary Graph Algorithms" },
+      { title: "Planarity of K\u2083,\u2083 and K\u2085", author: "R. Hilton", publisher: "rodhilton.com", chapter: "Proof of Non-Planarity using Euler\u2019s Formula" },
+      { title: "Planar Graph", author: "GeeksforGeeks", publisher: "geeksforgeeks.org", chapter: "Introduction to Planar Graphs" },
+      { title: "Bipartite Graph", author: "GeeksforGeeks", publisher: "geeksforgeeks.org", chapter: "Bipartite Graph Detection" },
+      { title: "Graph Coloring", author: "Chromagraph / Adam Rumpf", publisher: "adam-rumpf.github.io", chapter: "Graph Theory Problems in Games" }
     ]
   }
 ];
@@ -259,6 +286,15 @@ function renderModule(index) {
     </div>
   `).join('');
 
+  const referencesHTML = mod.references.map(r => `
+    <div class="ref-item">
+      <span class="ref-author">${r.author}</span>
+      <span class="ref-title">${r.title}</span>
+      <span class="ref-publisher">${r.publisher}</span>
+      <span class="ref-chapter">${r.chapter}</span>
+    </div>
+  `).join('');
+
   const nextHTML = nextMod
     ? `<div class="module-next">
          <button class="btn btn-outline" onclick="switchModule(${index + 1})">
@@ -298,6 +334,11 @@ function renderModule(index) {
             <span class="result-text" id="score-text-${mod.id}"></span>
           </div>
         </div>
+      </div>
+
+      <div class="references-section">
+        <div class="section-label"><span>References</span></div>
+        <div class="references-list">${referencesHTML}</div>
       </div>
 
       ${nextHTML}
