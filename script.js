@@ -246,6 +246,13 @@ function renderNav() {
           <p>Interactive sandbox</p>
         </div>
       </div>
+      <div class="nav-item" onclick="window.location.href='application.html'" style="cursor:pointer;">
+        <span class="nav-number" style="color: var(--accent); font-size: 16px;">&#128205;</span>
+        <div class="nav-info">
+          <h3>DMRC Application</h3>
+          <p>Real-world graph theory</p>
+        </div>
+      </div>
     </div>
   `;
 }
