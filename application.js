@@ -1,250 +1,267 @@
 /* =============================================
-   DMRC METRO DATA — SINGLE NODE PER STATION
+   GROUP METADATA
    ============================================= */
-const STATIONS = [
-  // ── Yellow Line ──
-  { id:'samaypur_badli', name:'Samaypur Badli', x:420, y:40, lines:['yellow'] },
-  { id:'azadpur', name:'Azadpur', x:420, y:80, lines:['yellow'] },
-  { id:'civil_lines', name:'Civil Lines', x:420, y:120, lines:['yellow'] },
-  { id:'kashmere_gate', name:'Kashmere Gate', x:420, y:165, lines:['yellow','red','violet'] },
-  { id:'chandni_chowk', name:'Chandni Chowk', x:420, y:200, lines:['yellow'] },
-  { id:'new_delhi', name:'New Delhi', x:420, y:235, lines:['yellow'] },
-  { id:'rajiv_chowk', name:'Rajiv Chowk', x:420, y:275, lines:['yellow','blue'] },
-  { id:'patel_chowk', name:'Patel Chowk', x:420, y:310, lines:['yellow'] },
-  { id:'central_sec', name:'Central Secretariat', x:420, y:355, lines:['yellow','violet'] },
-  { id:'udyog_bhawan', name:'Udyog Bhawan', x:420, y:390, lines:['yellow'] },
-  { id:'jorbagh', name:'Jorbagh', x:420, y:425, lines:['yellow'] },
-  { id:'hauz_khas', name:'Hauz Khas', x:420, y:465, lines:['yellow'] },
-
-  // ── Blue Line (unique only) ──
-  { id:'dwarka_sec21', name:'Dwarka Sec 21', x:50, y:275, lines:['blue'] },
-  { id:'dwarka', name:'Dwarka', x:100, y:275, lines:['blue'] },
-  { id:'dwarka_mor', name:'Dwarka Mor', x:150, y:275, lines:['blue'] },
-  { id:'rajouri_garden', name:'Rajouri Garden', x:215, y:275, lines:['blue'] },
-  { id:'kirti_nagar', name:'Kirti Nagar', x:280, y:275, lines:['blue','green'] },
-  { id:'karol_bagh', name:'Karol Bagh', x:340, y:275, lines:['blue'] },
-  { id:'barakhamba', name:'Barakhamba', x:475, y:275, lines:['blue'] },
-  { id:'mandi_house', name:'Mandi House', x:540, y:255, lines:['blue','violet'] },
-  { id:'pragati_maidan', name:'Pragati Maidan', x:600, y:260, lines:['blue'] },
-  { id:'akshardham', name:'Akshardham', x:665, y:268, lines:['blue'] },
-  { id:'noida_sec18', name:'Noida Sec 18', x:745, y:275, lines:['blue'] },
-
-  // ── Red Line (unique only) ──
-  { id:'rithala', name:'Rithala', x:80, y:165, lines:['red'] },
-  { id:'rohini_sec18', name:'Rohini Sec 18', x:130, y:165, lines:['red'] },
-  { id:'pitampura', name:'Pitampura', x:180, y:165, lines:['red'] },
-  { id:'netaji_subhash', name:'Netaji Subhash Place', x:235, y:165, lines:['red'] },
-  { id:'inderlok', name:'Inderlok', x:300, y:165, lines:['red','green'] },
-  { id:'pratap_nagar', name:'Pratap Nagar', x:345, y:165, lines:['red'] },
-  { id:'tis_hazari', name:'Tis Hazari', x:475, y:165, lines:['red'] },
-  { id:'pul_bangash', name:'Pul Bangash', x:530, y:165, lines:['red'] },
-  { id:'shastri_nagar', name:'Shastri Nagar', x:585, y:165, lines:['red'] },
-  { id:'shahdara', name:'Shahdara', x:650, y:165, lines:['red'] },
-
-  // ── Green Line (unique only) ──
-  { id:'satguru_ram', name:'Satguru Ramsingh Marg', x:280, y:230, lines:['green'] },
-  { id:'ashok_park', name:'Ashok Park Main', x:245, y:135, lines:['green'] },
-  { id:'punjabi_bagh', name:'Punjabi Bagh', x:195, y:135, lines:['green'] },
-  { id:'shivaji_park', name:'Shivaji Park', x:145, y:135, lines:['green'] },
-  { id:'mundka', name:'Mundka', x:90, y:135, lines:['green'] },
-
-  // ── Violet Line (unique only) ──
-  { id:'lal_quila', name:'Lal Quila', x:470, y:195, lines:['violet'] },
-  { id:'jama_masjid', name:'Jama Masjid', x:510, y:220, lines:['violet'] },
-  { id:'delhi_gate', name:'Delhi Gate', x:540, y:238, lines:['violet'] },
-  { id:'ito', name:'ITO', x:558, y:250, lines:['violet'] },
-  { id:'janpath', name:'Janpath', x:510, y:290, lines:['violet'] },
-  { id:'khan_market', name:'Khan Market', x:480, y:380, lines:['violet'] },
-  { id:'jln_stadium', name:'JLN Stadium', x:530, y:405, lines:['violet'] },
-];
-
-// Mark interchange
-STATIONS.forEach(s => { s.interchange = s.lines.length > 1; });
-
-// Station lookup
-const stationMap = new Map(STATIONS.map(s => [s.id, s]));
-
-/* =============================================
-   EDGES — EACH WITH LINE INFO
-   ============================================= */
-const EDGES = [
-  // Blue Line
-  { from:'dwarka_sec21', to:'dwarka', line:'blue' },
-  { from:'dwarka', to:'dwarka_mor', line:'blue' },
-  { from:'dwarka_mor', to:'rajouri_garden', line:'blue' },
-  { from:'rajouri_garden', to:'kirti_nagar', line:'blue' },
-  { from:'kirti_nagar', to:'karol_bagh', line:'blue' },
-  { from:'karol_bagh', to:'rajiv_chowk', line:'blue' },
-  { from:'rajiv_chowk', to:'barakhamba', line:'blue' },
-  { from:'barakhamba', to:'mandi_house', line:'blue' },
-  { from:'mandi_house', to:'pragati_maidan', line:'blue' },
-  { from:'pragati_maidan', to:'akshardham', line:'blue' },
-  { from:'akshardham', to:'noida_sec18', line:'blue' },
-
-  // Yellow Line
-  { from:'samaypur_badli', to:'azadpur', line:'yellow' },
-  { from:'azadpur', to:'civil_lines', line:'yellow' },
-  { from:'civil_lines', to:'kashmere_gate', line:'yellow' },
-  { from:'kashmere_gate', to:'chandni_chowk', line:'yellow' },
-  { from:'chandni_chowk', to:'new_delhi', line:'yellow' },
-  { from:'new_delhi', to:'rajiv_chowk', line:'yellow' },
-  { from:'rajiv_chowk', to:'patel_chowk', line:'yellow' },
-  { from:'patel_chowk', to:'central_sec', line:'yellow' },
-  { from:'central_sec', to:'udyog_bhawan', line:'yellow' },
-  { from:'udyog_bhawan', to:'jorbagh', line:'yellow' },
-  { from:'jorbagh', to:'hauz_khas', line:'yellow' },
-
-  // Red Line
-  { from:'rithala', to:'rohini_sec18', line:'red' },
-  { from:'rohini_sec18', to:'pitampura', line:'red' },
-  { from:'pitampura', to:'netaji_subhash', line:'red' },
-  { from:'netaji_subhash', to:'inderlok', line:'red' },
-  { from:'inderlok', to:'pratap_nagar', line:'red' },
-  { from:'pratap_nagar', to:'kashmere_gate', line:'red' },
-  { from:'kashmere_gate', to:'tis_hazari', line:'red' },
-  { from:'tis_hazari', to:'pul_bangash', line:'red' },
-  { from:'pul_bangash', to:'shastri_nagar', line:'red' },
-  { from:'shastri_nagar', to:'shahdara', line:'red' },
-
-  // Green Line
-  { from:'kirti_nagar', to:'satguru_ram', line:'green' },
-  { from:'satguru_ram', to:'inderlok', line:'green' },
-  { from:'inderlok', to:'ashok_park', line:'green' },
-  { from:'ashok_park', to:'punjabi_bagh', line:'green' },
-  { from:'punjabi_bagh', to:'shivaji_park', line:'green' },
-  { from:'shivaji_park', to:'mundka', line:'green' },
-
-  // Violet Line
-  { from:'kashmere_gate', to:'lal_quila', line:'violet' },
-  { from:'lal_quila', to:'jama_masjid', line:'violet' },
-  { from:'jama_masjid', to:'delhi_gate', line:'violet' },
-  { from:'delhi_gate', to:'ito', line:'violet' },
-  { from:'ito', to:'mandi_house', line:'violet' },
-  { from:'mandi_house', to:'janpath', line:'violet' },
-  { from:'janpath', to:'central_sec', line:'violet' },
-  { from:'central_sec', to:'khan_market', line:'violet' },
-  { from:'khan_market', to:'jln_stadium', line:'violet' },
-];
-
-/* =============================================
-   LINE METADATA
-   ============================================= */
-const LINES = {
-  blue:   { color:'#4a90d9', name:'Blue Line' },
-  yellow: { color:'#ffd428', name:'Yellow Line' },
-  red:    { color:'#e8453c', name:'Red Line' },
-  green:  { color:'#5cb85c', name:'Green Line' },
-  violet: { color:'#9b59b6', name:'Violet Line' },
+const GROUPS = {
+  college: { color:'#00d4ff', name:'College Friends' },
+  work:    { color:'#5cb85c', name:'Work Colleagues' },
+  family:  { color:'#ffd428', name:'Family' },
+  gaming:  { color:'#9b59b6', name:'Gaming Circle' },
+  neighbor:{ color:'#e8783c', name:'Neighbors' }
 };
+
+/* =============================================
+   PEOPLE DATA
+   ============================================= */
+const PEOPLE = [
+  // College (left side)
+  { id:'bob',     name:'Bob',     group:'college', x:70,  y:200 },
+  { id:'eve',     name:'Eve',     group:'college', x:185, y:180 },
+  { id:'alice',   name:'Alice',   group:'college', x:120, y:270 },
+  { id:'diana',   name:'Diana',   group:'college', x:55,  y:330 },
+  { id:'charlie', name:'Charlie', group:'college', x:200, y:335 },
+
+  // Work (right side)
+  { id:'hugo',    name:'Hugo',    group:'work', x:580, y:180 },
+  { id:'frank',   name:'Frank',   group:'work', x:685, y:200 },
+  { id:'grace',   name:'Grace',   group:'work', x:740, y:270 },
+  { id:'ivy',     name:'Ivy',     group:'work', x:615, y:330 },
+  { id:'jack',    name:'Jack',    group:'work', x:700, y:345 },
+
+  // Family (top center)
+  { id:'mia',     name:'Mia',     group:'family', x:230, y:60  },
+  { id:'kate',    name:'Kate',    group:'family', x:340, y:45  },
+  { id:'noah',    name:'Noah',    group:'family', x:440, y:60  },
+  { id:'liam',    name:'Liam',    group:'family', x:400, y:130 },
+  { id:'olivia',  name:'Olivia',  group:'family', x:290, y:130 },
+
+  // Gaming (bottom left)
+  { id:'pete',    name:'Pete',    group:'gaming', x:65,  y:405 },
+  { id:'tina',    name:'Tina',    group:'gaming', x:170, y:390 },
+  { id:'quinn',   name:'Quinn',   group:'gaming', x:90,  y:475 },
+  { id:'rosa',    name:'Rosa',    group:'gaming', x:45,  y:495 },
+  { id:'sam',     name:'Sam',     group:'gaming', x:225, y:465 },
+
+  // Neighbors (bottom right)
+  { id:'uma',     name:'Uma',     group:'neighbor', x:560, y:405 },
+  { id:'will',    name:'Will',    group:'neighbor', x:495, y:465 },
+  { id:'vic',     name:'Vic',     group:'neighbor', x:635, y:435 },
+  { id:'xena',    name:'Xena',    group:'neighbor', x:725, y:400 },
+  { id:'yara',    name:'Yara',    group:'neighbor', x:665, y:500 }
+];
+
+const personMap = new Map(PEOPLE.map(p => [p.id, p]));
+function initials(id) { return personMap.get(id).name[0]; }
+function sub(n) { const s='₀₁₂₃₄₅₆₇₈₉'; return String(n).split('').map(d=>s[+d]).join(''); }
+
+/* =============================================
+   FRIENDSHIPS
+   ============================================= */
+const FRIENDSHIPS = [
+  // College (8) — dense friend circle
+  { from:'alice', to:'bob' }, { from:'alice', to:'charlie' },
+  { from:'alice', to:'diana' }, { from:'alice', to:'eve' },
+  { from:'bob', to:'charlie' }, { from:'bob', to:'eve' },
+  { from:'charlie', to:'diana' }, { from:'diana', to:'eve' },
+
+  // Work (7)
+  { from:'frank', to:'grace' }, { from:'frank', to:'hugo' },
+  { from:'frank', to:'ivy' }, { from:'grace', to:'hugo' },
+  { from:'grace', to:'ivy' }, { from:'hugo', to:'jack' },
+  { from:'ivy', to:'jack' },
+
+  // Family (7)
+  { from:'kate', to:'liam' }, { from:'kate', to:'mia' },
+  { from:'kate', to:'noah' }, { from:'liam', to:'noah' },
+  { from:'liam', to:'olivia' }, { from:'mia', to:'olivia' },
+  { from:'noah', to:'olivia' },
+
+  // Gaming (6)
+  { from:'pete', to:'quinn' }, { from:'pete', to:'rosa' },
+  { from:'quinn', to:'rosa' }, { from:'quinn', to:'tina' },
+  { from:'rosa', to:'tina' }, { from:'sam', to:'tina' },
+
+  // Neighbors (6)
+  { from:'uma', to:'vic' }, { from:'uma', to:'will' },
+  { from:'vic', to:'will' }, { from:'vic', to:'xena' },
+  { from:'will', to:'yara' }, { from:'xena', to:'yara' },
+
+  // Cross-group bridges (8)
+  { from:'alice',   to:'kate' },   // college-family
+  { from:'bob',     to:'pete' },   // college-gaming
+  { from:'charlie', to:'frank' },  // college-work
+  { from:'diana',   to:'uma' },    // college-neighbors
+  { from:'eve',     to:'grace' },  // college-work
+  { from:'ivy',     to:'olivia' }, // work-family
+  { from:'jack',    to:'sam' },    // work-gaming
+  { from:'liam',    to:'will' }    // family-neighbors
+];
+
+/* =============================================
+   INTEREST GROUPS (BIPARTITE)
+   ============================================= */
+const INTERESTS = [
+  { id:'music', name:'Music',      members:['alice','grace','kate','pete','quinn'] },
+  { id:'sports', name:'Sports',    members:['bob','frank','liam','sam','uma'] },
+  { id:'tech',   name:'Tech',      members:['charlie','hugo','ivy','quinn','tina'] },
+  { id:'art',    name:'Art & Design', members:['diana','eve','mia','olivia','rosa'] },
+  { id:'fitness', name:'Fitness',  members:['frank','jack','noah','uma','vic','xena'] }
+];
 
 /* =============================================
    BUILD GRAPH
    ============================================= */
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const adj = new Map();
-STATIONS.forEach(s => adj.set(s.id, []));
+PEOPLE.forEach(p => adj.set(p.id, []));
 
-// Compute weights and build adjacency
-EDGES.forEach(e => {
-  const a = stationMap.get(e.from), b = stationMap.get(e.to);
-  const dist = Math.max(Math.round(Math.hypot(a.x - b.x, a.y - b.y) / 5), 1);
-  adj.get(e.from).push({ to: e.to, dist, line: e.line });
-  adj.get(e.to).push({ to: e.from, dist, line: e.line });
+FRIENDSHIPS.forEach(f => {
+  adj.get(f.from).push(f.to);
+  adj.get(f.to).push(f.from);
 });
 
-// Edge lookup helper
-function findEdge(a, b) {
-  return EDGES.find(e =>
-    (e.from === a && e.to === b) || (e.from === b && e.to === a)
-  );
+function isEdge(a, b) {
+  return adj.get(a).includes(b);
 }
 
-function sub(n) { const s='₀₁₂₃₄₅₆₇₈₉'; return String(n).split('').map(d=>s[+d]).join(''); }
+function sameGroup(a, b) {
+  return personMap.get(a).group === personMap.get(b).group;
+}
+
+function mutualFriends(a, b) {
+  const setA = new Set(adj.get(a));
+  return adj.get(b).filter(x => setA.has(x));
+}
+
+function getInitials(id) { return personMap.get(id).name.split(' ').map(w=>w[0]).join(''); }
 
 /* =============================================
-   DOM
+   DOM REFS
    ============================================= */
-const svg = document.getElementById('metroMap');
+const svg = document.getElementById('networkMap');
 const edgesG = document.getElementById('edgesG');
 const pathG = document.getElementById('pathG');
+const suggestG = document.getElementById('suggestG');
 const nodesG = document.getElementById('nodesG');
+const groupLabelsG = document.getElementById('groupLabelsG');
 const legendG = document.getElementById('legendG');
-const sourceSelect = document.getElementById('sourceSelect');
-const destSelect = document.getElementById('destSelect');
+const personASelect = document.getElementById('personA');
+const personBSelect = document.getElementById('personB');
 const findPathBtn = document.getElementById('findPathBtn');
 const resetBtn = document.getElementById('resetBtn');
 const randomBtn = document.getElementById('randomBtn');
 const pathOutput = document.getElementById('pathOutput');
-const analysisOutput = document.getElementById('analysisOutput');
+const profileOutput = document.getElementById('profileOutput');
+const suggestOutput = document.getElementById('suggestOutput');
 const pathCard = document.getElementById('pathCard');
-const analysisCard = document.getElementById('analysisCard');
+const profileCard = document.getElementById('profileCard');
+const suggestCard = document.getElementById('suggestCard');
 const stationInfo = document.getElementById('stationInfo');
 const propsGrid = document.getElementById('propsGrid');
 const detectedProps = document.getElementById('detectedProps');
-const conceptsList = document.getElementById('conceptsList');
+const graphTypesList = document.getElementById('graphTypesList');
 
-let hoveredStation = null;
+let selectedPerson = null;
 
 /* =============================================
    RENDER MAP
    ============================================= */
 function renderMap() {
-  // Draw edges — each colored by its metro line
-  EDGES.forEach(e => {
-    const a = stationMap.get(e.from), b = stationMap.get(e.to);
+  // Group labels
+  const groupCenters = {};
+  Object.keys(GROUPS).forEach(g => {
+    const members = PEOPLE.filter(p => p.group === g);
+    const cx = members.reduce((s,p) => s+p.x, 0) / members.length;
+    const cy = members.reduce((s,p) => s+p.y, 0) / members.length;
+    groupCenters[g] = { x: cx, y: cy - 45 };
+    const t = document.createElementNS(SVG_NS, 'text');
+    t.setAttribute('x', cx); t.setAttribute('y', cy - 45);
+    t.setAttribute('text-anchor', 'middle');
+    t.classList.add('group-label');
+    t.setAttribute('fill', GROUPS[g].color);
+    t.setAttribute('opacity', '0.4');
+    t.textContent = GROUPS[g].name;
+    groupLabelsG.appendChild(t);
+  });
+
+  // Edges
+  // Edges — clearly visible
+  FRIENDSHIPS.forEach(f => {
+    const a = personMap.get(f.from), b = personMap.get(f.to);
+    const sg = sameGroup(f.from, f.to);
+    const color = sg ? GROUPS[a.group].color : 'rgba(0,212,255,0.6)';
+
     const line = document.createElementNS(SVG_NS, 'line');
     line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
     line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
-    line.setAttribute('stroke', LINES[e.line].color);
-    line.classList.add('metro-edge');
-    line.dataset.from = e.from; line.dataset.to = e.to; line.dataset.line = e.line;
+    line.setAttribute('stroke', color);
+    line.setAttribute('stroke-width', sg ? '2' : '1.5');
+    line.classList.add('social-edge');
+    line.classList.add(sg ? 'same-group' : 'cross-group');
+    line.dataset.from = f.from; line.dataset.to = f.to;
     edgesG.appendChild(line);
   });
 
-  // Draw nodes
-  STATIONS.forEach(n => {
+  // Nodes
+    // Nodes — with smart label positioning
+  PEOPLE.forEach(p => {
     const g = document.createElementNS(SVG_NS, 'g');
-    g.classList.add('station-node'); g.dataset.id = n.id;
+    g.classList.add('social-node'); g.dataset.id = p.id;
 
-    const r = n.interchange ? 7 : 4;
     const c = document.createElementNS(SVG_NS, 'circle');
-    c.setAttribute('cx', n.x); c.setAttribute('cy', n.y); c.setAttribute('r', r);
-    c.setAttribute('fill', n.interchange ? '#ffffff' : LINES[n.lines[0]].color);
-    if (n.interchange) {
-      c.setAttribute('stroke', '#ffffff'); c.setAttribute('stroke-width', '2');
-      c.setAttribute('fill', '#08080c');
-    }
+    c.setAttribute('cx', p.x); c.setAttribute('cy', p.y);
+    c.setAttribute('r', '11');
+    c.setAttribute('fill', GROUPS[p.group].color);
+    c.setAttribute('fill-opacity', '0.25');
+    c.setAttribute('stroke', GROUPS[p.group].color);
+    c.setAttribute('stroke-width', '1.5');
+    c.classList.add('person-circle');
 
     const t = document.createElementNS(SVG_NS, 'text');
-    t.setAttribute('x', n.x); t.setAttribute('y', n.y - (r + 4));
+    t.setAttribute('x', p.x); t.setAttribute('y', p.y);
     t.setAttribute('text-anchor', 'middle');
-    t.classList.add('station-label');
-    if (n.interchange) t.classList.add('interchange-label');
-    t.textContent = n.name;
+    t.setAttribute('dominant-baseline', 'central');
+    t.setAttribute('fill', GROUPS[p.group].color);
+    t.classList.add('person-initials');
+    t.setAttribute('font-size', '9');
+    t.textContent = getInitials(p.id);
 
-    g.appendChild(c); g.appendChild(t);
+    // Label: below if in top half, above if in bottom half
+    const lbl = document.createElementNS(SVG_NS, 'text');
+    lbl.setAttribute('x', p.x);
+    const labelBelow = p.y < 280;
+    lbl.setAttribute('y', labelBelow ? p.y + 20 : p.y - 16);
+    lbl.setAttribute('text-anchor', 'middle');
+    lbl.classList.add('person-name-label');
+    lbl.textContent = p.name;
+
+    g.appendChild(c); g.appendChild(t); g.appendChild(lbl);
     nodesG.appendChild(g);
 
-    g.addEventListener('mouseenter', () => { hoveredStation = n; showStationInfo(n); });
-    g.addEventListener('mouseleave', () => { hoveredStation = null; clearStationInfo(); });
-    g.addEventListener('click', () => selectStation(n.id));
+    g.addEventListener('mouseenter', () => showProfile(p));
+    g.addEventListener('mouseleave', () => hideProfile());
+    g.addEventListener('click', () => selectPerson(p.id));
   });
 
-  // Draw legend
-  const lineKeys = Object.keys(LINES);
-  lineKeys.forEach((key, i) => {
-    const x = i * 150;
-    const bar = document.createElementNS(SVG_NS, 'rect');
-    bar.setAttribute('x', x); bar.setAttribute('y', 0);
-    bar.setAttribute('width', 20); bar.setAttribute('height', 4);
-    bar.setAttribute('rx', 2); bar.setAttribute('fill', LINES[key].color);
-    legendG.appendChild(bar);
+  // Legend
+  const keys = Object.keys(GROUPS);
+  keys.forEach((key, i) => {
+    const x = i * 155;
+    const dot = document.createElementNS(SVG_NS, 'circle');
+    dot.setAttribute('cx', x + 5); dot.setAttribute('cy', 5);
+    dot.setAttribute('r', '4');
+    dot.setAttribute('fill', GROUPS[key].color);
+    dot.setAttribute('fill-opacity', '0.3');
+    dot.setAttribute('stroke', GROUPS[key].color);
+    dot.setAttribute('stroke-width', '1');
+    legendG.appendChild(dot);
 
     const txt = document.createElementNS(SVG_NS, 'text');
-    txt.setAttribute('x', x + 26); txt.setAttribute('y', 5);
-    txt.setAttribute('font-family', 'IBM Plex Mono, monospace');
-    txt.setAttribute('font-size', '9'); txt.setAttribute('fill', '#555568');
-    txt.textContent = LINES[key].name;
+    txt.setAttribute('x', x + 16); txt.setAttribute('y', 8);
+    txt.setAttribute('font-family', 'JetBrains Mono, monospace');
+    txt.setAttribute('font-size', '8');
+    txt.setAttribute('fill', '#2e4a6a');
+    txt.setAttribute('letter-spacing', '0.5');
+    txt.textContent = GROUPS[key].name;
     legendG.appendChild(txt);
   });
 }
@@ -253,261 +270,301 @@ function renderMap() {
    POPULATE SELECTS
    ============================================= */
 function populateSelects() {
-  const sorted = [...STATIONS].sort((a, b) => a.name.localeCompare(b.name));
-  sorted.forEach(n => {
-    sourceSelect.appendChild(new Option(n.name, n.id));
-    destSelect.appendChild(new Option(n.name, n.id));
+  const sorted = [...PEOPLE].sort((a,b) => a.name.localeCompare(b.name));
+  sorted.forEach(p => {
+    personASelect.appendChild(new Option(p.name, p.id));
+    personBSelect.appendChild(new Option(p.name, p.id));
   });
 }
 
 /* =============================================
-   STATION INTERACTION
+   PERSON INTERACTION
    ============================================= */
-function showStationInfo(n) {
-  const deg = adj.get(n.id).length;
-  const lineTags = n.lines.map(l =>
-    `<span class="info-tag" style="color:${LINES[l].color};background:${LINES[l].color}15;border:1px solid ${LINES[l].color}30;">${LINES[l].name}</span>`
-  ).join(' ');
-  const typeTag = n.interchange
-    ? `<span class="info-tag" style="color:var(--accent);background:var(--accent-dim);border:1px solid rgba(0,229,160,0.25);">INTERCHANGE (Degree ${deg})</span>`
-    : `<span class="info-tag" style="color:var(--text-muted);background:var(--surface-2);border:1px solid var(--border);">Degree ${deg}</span>`;
-
-  stationInfo.innerHTML = `
-    <div class="info-stat">
-      <span class="info-dot" style="background:${n.interchange ? '#fff' : LINES[n.lines[0]].color}"></span>
-      <span class="info-value">${n.name}</span>
-    </div>
-    ${typeTag} ${lineTags}
-  `;
+function selectPerson(id) {
+  if (!personASelect.value) { personASelect.value = id; highlightNode(id); }
+  else if (!personBSelect.value && personASelect.value !== id) { personBSelect.value = id; }
+  else { personASelect.value = id; personBSelect.value = ''; clearHighlights(); highlightNode(id); }
 }
 
-function clearStationInfo() {
-  stationInfo.innerHTML = `<span class="info-empty">Hover over a station to see details · Click to select</span>`;
+function highlightNode(id) {
+  const deg = new Set(adj.get(id));
+  deg.add(id);
+  nodesG.querySelectorAll('.social-node').forEach(n => {
+    n.classList.toggle('dim', !deg.has(n.dataset.id));
+    n.classList.toggle('highlighted', n.dataset.id === id);
+  });
+  edgesG.querySelectorAll('.social-edge').forEach(e => {
+    const connected = e.dataset.from === id || e.dataset.to === id;
+    e.classList.toggle('dim', !connected);
+    e.classList.toggle('highlight', connected);
+  });
+  showSuggestions(id);
 }
 
-function selectStation(id) {
-  if (!sourceSelect.value) { sourceSelect.value = id; }
-  else if (!destSelect.value && sourceSelect.value !== id) { destSelect.value = id; }
-  else { sourceSelect.value = id; destSelect.value = ''; }
+function clearHighlights() {
+  nodesG.querySelectorAll('.social-node').forEach(n => {
+    n.classList.remove('dim', 'highlighted');
+  });
+  edgesG.querySelectorAll('.social-edge').forEach(e => {
+    e.classList.remove('dim', 'highlight');
+  });
+  suggestG.innerHTML = '';
+  suggestCard.style.display = 'none';
 }
 
 /* =============================================
-   DIJKSTRA'S ALGORITHM
+   PROFILE PANEL
    ============================================= */
-function dijkstra(src, dst) {
-  const dist = new Map(), prev = new Map(), prevEdge = new Map(), visited = new Set();
-  STATIONS.forEach(s => dist.set(s.id, Infinity));
-  dist.set(src, 0);
+function showProfile(p) {
+  const friends = adj.get(p.id);
+  const interests = INTERESTS.filter(i => i.members.includes(p.id));
+  const color = GROUPS[p.group].color;
 
-  while (true) {
-    let u = null, min = Infinity;
-    for (const [id, d] of dist) { if (!visited.has(id) && d < min) { min = d; u = id; } }
-    if (u === null || u === dst) break;
-    visited.add(u);
-    adj.get(u).forEach(({ to, dist: w }) => {
-      const alt = dist.get(u) + w;
-      if (alt < dist.get(to)) { dist.set(to, alt); prev.set(to, u); prevEdge.set(to, { line: findEdge(u, to).line }); }
+  const friendsHTML = friends.map(fid => {
+    const fp = personMap.get(fid);
+    const fc = GROUPS[fp.group].color;
+    return `<span class="friend-chip" style="color:${fc};border-color:${fc}30;background:${fc}08;" onclick="selectPerson('${fid}')">${fp.name}</span>`;
+  }).join('');
+
+  const interestsHTML = interests.map(i => i.name).join(', ') || 'None listed';
+
+  profileCard.style.display = 'block';
+  profileOutput.innerHTML = `
+    <div class="profile-header">
+      <div class="profile-avatar" style="background:${color}20;border-color:${color};color:${color};">${getInitials(p.id)}</div>
+      <div>
+        <div class="profile-name">${p.name}</div>
+        <div class="profile-group" style="color:${color};">${GROUPS[p.group].name}</div>
+      </div>
+    </div>
+    <div class="profile-stats">
+      <div class="profile-stat"><span class="ps-val">${friends.length}</span><span class="ps-lbl">Friends</span></div>
+      <div class="profile-stat"><span class="ps-val">${interests.length}</span><span class="ps-lbl">Interests</span></div>
+    </div>
+    <div style="font-size:9px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px;">INTERESTS: <span style="color:var(--text-secondary);">${interestsHTML}</span></div>
+    <div style="font-size:9px;color:var(--text-muted);letter-spacing:1px;margin-bottom:6px;">FRIENDS</div>
+    <div class="profile-friends">${friendsHTML}</div>
+  `;
+}
+
+function hideProfile() {
+  if (!selectedPerson) {
+    profileCard.style.display = 'none';
+  }
+}
+
+/* =============================================
+   SUGGESTIONS — PEOPLE YOU MAY KNOW
+   ============================================= */
+function showSuggestions(id) {
+  const directFriends = new Set(adj.get(id));
+  const candidates = new Map(); // personId -> mutual count
+
+  adj.get(id).forEach(friend => {
+    adj.get(friend).forEach(ff => {
+      if (ff !== id && !directFriends.has(ff)) {
+        candidates.set(ff, (candidates.get(ff) || 0) + 1);
+      }
+    });
+  });
+
+  if (candidates.size === 0) {
+    suggestCard.style.display = 'none';
+    return;
+  }
+
+  const sorted = [...candidates.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+  suggestCard.style.display = 'block';
+  suggestOutput.innerHTML = sorted.map(([pid, count]) => {
+    const p = personMap.get(pid);
+    const color = GROUPS[p.group].color;
+    return `
+      <div class="suggest-item" onclick="selectPerson('${pid}')">
+        <div class="suggest-avatar" style="background:${color};">${getInitials(pid)}</div>
+        <div class="suggest-info">
+          <div class="suggest-name">${p.name}</div>
+          <div class="suggest-reason">${count} mutual friend${count > 1 ? 's' : ''} · ${GROUPS[p.group].name}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Draw suggestion rings on map
+  suggestG.innerHTML = '';
+  sorted.forEach(([pid]) => {
+    const p = personMap.get(pid);
+    const ring = document.createElementNS(SVG_NS, 'circle');
+    ring.setAttribute('cx', p.x); ring.setAttribute('cy', p.y);
+    ring.setAttribute('r', '20');
+    ring.classList.add('suggest-ring', 'show');
+    suggestG.appendChild(ring);
+  });
+}
+
+/* =============================================
+   BFS — SHORTEST SOCIAL PATH
+   ============================================= */
+function bfs(src, dst) {
+  const visited = new Set([src]);
+  const prev = new Map();
+  const queue = [src];
+
+  while (queue.length) {
+    const cur = queue.shift();
+    if (cur === dst) break;
+    adj.get(cur).forEach(nb => {
+      if (!visited.has(nb)) {
+        visited.add(nb);
+        prev.set(nb, cur);
+        queue.push(nb);
+      }
     });
   }
 
-  if (dist.get(dst) === Infinity) return null;
-  const path = []; const edgeLines = []; let cur = dst;
-  while (cur) { path.unshift(cur); if (prevEdge.has(cur)) edgeLines.unshift(prevEdge.get(cur).line); cur = prev.get(cur); }
-  return { path, distance: dist.get(dst), edgeLines };
+  if (!visited.has(dst)) return null;
+  const path = [];
+  let cur = dst;
+  while (cur !== undefined) { path.unshift(cur); cur = prev.get(cur); }
+  return path;
 }
 
 /* =============================================
    FIND PATH
    ============================================= */
 function findPath() {
-  const src = sourceSelect.value, dst = destSelect.value;
+  const src = personASelect.value, dst = personBSelect.value;
   if (!src || !dst) return;
   if (src === dst) return;
 
   clearPath();
-  const result = dijkstra(src, dst);
-  if (!result) return;
+  const path = bfs(src, dst);
+  if (!path) return;
 
-  drawPath(result.path, result.edgeLines);
-  showPathStats(result);
-  showPathAnalysis(result);
+  drawPath(path);
+  showPathStats(path);
 }
 
 function clearPath() {
   pathG.innerHTML = '';
-  edgesG.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+  suggestG.innerHTML = '';
+  edgesG.querySelectorAll('.highlight, .dim').forEach(el => el.classList.remove('highlight', 'dim'));
+  nodesG.querySelectorAll('.dim, .highlighted').forEach(el => el.classList.remove('dim', 'highlighted'));
   pathCard.style.display = 'none';
-  analysisCard.style.display = 'none';
+  suggestCard.style.display = 'none';
 }
 
 /* =============================================
    DRAW PATH ON MAP
    ============================================= */
-function drawPath(path, edgeLines) {
-  // Glow + line segments colored by metro line
+function drawPath(path) {
+  // Dim everything
+  nodesG.querySelectorAll('.social-node').forEach(n => n.classList.add('dim'));
+  edgesG.querySelectorAll('.social-edge').forEach(e => e.classList.add('dim'));
+
+  // Highlight path nodes
+  path.forEach(pid => {
+    nodesG.querySelector(`[data-id="${pid}"]`).classList.remove('dim');
+    nodesG.querySelector(`[data-id="${pid}"]`).classList.add('highlighted');
+  });
+
+  // Draw path edges
   for (let i = 0; i < path.length - 1; i++) {
-    const a = stationMap.get(path[i]), b = stationMap.get(path[i + 1]);
-    const color = LINES[edgeLines[i]].color;
+    const a = personMap.get(path[i]), b = personMap.get(path[i+1]);
 
     const glow = document.createElementNS(SVG_NS, 'line');
     glow.setAttribute('x1', a.x); glow.setAttribute('y1', a.y);
     glow.setAttribute('x2', b.x); glow.setAttribute('y2', b.y);
-    glow.setAttribute('stroke', '#00e5a0');
-    glow.classList.add('path-glow');
-    glow.style.animationDelay = (i * 0.08) + 's';
+    glow.setAttribute('stroke', '#00d4ff');
+    glow.classList.add('path-glow-line');
+    glow.style.animationDelay = (i * 0.1) + 's';
     pathG.appendChild(glow);
 
     const line = document.createElementNS(SVG_NS, 'line');
     line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
     line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
-    line.setAttribute('stroke', color);
-    line.classList.add('path-line');
-    line.style.opacity = '0'; line.style.transition = `opacity .4s ${i * 0.06}s`;
+    line.setAttribute('stroke', '#00d4ff');
+    line.classList.add('path-main-line');
+    line.style.opacity = '0'; line.style.transition = `opacity .4s ${i*0.08}s`;
     pathG.appendChild(line);
     requestAnimationFrame(() => { line.style.opacity = '1'; });
-  }
 
-  // Station rings on path
-  path.forEach((pid, i) => {
-    const n = stationMap.get(pid);
-    const ring = document.createElementNS(SVG_NS, 'circle');
-    ring.setAttribute('cx', n.x); ring.setAttribute('cy', n.y);
-    ring.setAttribute('r', n.interchange ? 9 : 6);
-    ring.setAttribute('fill', 'none'); ring.setAttribute('stroke', '#00e5a0');
-    ring.setAttribute('stroke-width', '2'); ring.setAttribute('opacity', '0.5');
-    ring.style.transition = `opacity .3s ${i * 0.05}s`;
-    ring.style.opacity = '0';
-    pathG.appendChild(ring);
-    requestAnimationFrame(() => { ring.style.opacity = '0.5'; });
-  });
-
-  // Highlight edges
-  for (let i = 0; i < path.length - 1; i++) {
-    const key1 = path[i], key2 = path[i + 1];
-    edgesG.querySelectorAll('.metro-edge').forEach(el => {
-      if ((el.dataset.from === key1 && el.dataset.to === key2) || (el.dataset.from === key2 && el.dataset.to === key1)) {
-        el.classList.add('highlight');
+    // Highlight the edge in the main layer too
+    edgesG.querySelectorAll('.social-edge').forEach(e => {
+      if ((e.dataset.from===path[i]&&e.dataset.to===path[i+1])||(e.dataset.from===path[i+1]&&e.dataset.to===path[i])) {
+        e.classList.remove('dim'); e.classList.add('highlight');
       }
     });
   }
+
+  // Ring on path nodes
+  path.forEach((pid, i) => {
+    const p = personMap.get(pid);
+    const ring = document.createElementNS(SVG_NS, 'circle');
+    ring.setAttribute('cx', p.x); ring.setAttribute('cy', p.y);
+    ring.setAttribute('r', '18'); ring.setAttribute('fill', 'none');
+    ring.setAttribute('stroke', '#00d4ff'); ring.setAttribute('stroke-width', '1.5');
+    ring.classList.add('path-node-ring');
+    ring.style.opacity = '0'; ring.style.transition = `opacity .3s ${i*0.06}s`;
+    pathG.appendChild(ring);
+    requestAnimationFrame(() => { ring.style.opacity = '0.5'; });
+  });
 }
 
 /* =============================================
    PATH STATISTICS
    ============================================= */
-function showPathStats(result) {
-  const { path, distance, edgeLines } = result;
+function showPathStats(path) {
+  const degrees = path.length - 1;
+  const mutual = mutualFriends(path[0], path[path.length - 1]);
 
-  // Detect interchanges along path
-  const interchanges = [];
-  let currentLine = edgeLines[0] || 'blue';
-  for (let i = 1; i < edgeLines.length; i++) {
-    if (edgeLines[i] !== currentLine) {
-      interchanges.push({ station: path[i], from: currentLine, to: edgeLines[i] });
-      currentLine = edgeLines[i];
-    }
-  }
+  // Common interests
+  const interestsA = new Set(INTERESTS.filter(i => i.members.includes(path[0])).map(i => i.id));
+  const commonInterests = INTERESTS.filter(i => interestsA.has(i.id) && i.members.includes(path[path.length-1]));
 
-  const linesUsed = [...new Set(edgeLines)];
-
-  let stepsHTML = '';
-  let prevLine = null;
-  path.forEach((pid, i) => {
-    const n = stationMap.get(pid);
+  let stepsHTML = path.map((pid, i) => {
+    const p = personMap.get(pid);
+    const color = GROUPS[p.group].color;
     const isFirst = i === 0, isLast = i === path.length - 1;
-    const edgeLine = i < edgeLines.length ? edgeLines[i] : prevLine;
-    const lineColor = edgeLine ? LINES[edgeLine].color : '#00e5a0';
-    const isInterchange = interchanges.find(ic => ic.station === pid);
-
-    if (edgeLine) prevLine = edgeLine;
+    const connector = !isLast ? `<div class="step-connector" style="background:${color}40;"></div>` : '';
 
     let detail = '';
     if (isFirst) detail = 'START';
-    else if (isLast) detail = 'DESTINATION';
-    else if (isInterchange) detail = `INTERCHANGE \u2192 ${LINES[isInterchange.to].name}`;
+    else if (isLast) detail = 'TARGET';
 
-    const lineTag = (edgeLine && (isFirst || isInterchange))
-      ? `<span class="step-line-tag" style="color:${LINES[edgeLine].color};background:${LINES[edgeLine].color}15;border:1px solid ${LINES[edgeLine].color}25;">${LINES[edgeLine].name}</span>` : '';
-
-    stepsHTML += `
+    return `
       <div class="step">
-        <div class="step-dot" style="border-color:${lineColor};background:${isFirst||isLast?'var(--accent)':'transparent'};"></div>
+        <div class="step-dot" style="border-color:${color};background:${isFirst||isLast?color:'transparent'}"></div>
         <div class="step-info">
-          <div class="step-name">${n.name}</div>
+          <div class="step-name">${p.name}</div>
           ${detail ? `<div class="step-detail">${detail}</div>` : ''}
-          ${lineTag}
         </div>
       </div>
-      ${!isLast ? `<div class="step-connector" style="background:${i < edgeLines.length ? LINES[edgeLines[i]].color : lineColor};"></div>` : ''}
+      ${connector}
     `;
-  });
+  }).join('');
+
+  const mutualHTML = mutual.length
+    ? mutual.map(mid => `<span class="friend-chip" style="color:var(--accent);border-color:rgba(0,212,255,0.2);background:rgba(0,212,255,0.04);">${personMap.get(mid).name}</span>`).join(' ')
+    : '<span style="font-size:10px;color:var(--text-muted);">No mutual friends</span>';
+
+  const interestHTML = commonInterests.length
+    ? commonInterests.map(i => i.name).join(', ')
+    : 'None';
 
   pathCard.style.display = 'block';
   pathOutput.innerHTML = `
     <div class="path-summary">
-      <div class="path-stat"><span class="p-val">${path.length}</span><span class="p-lbl">Stations</span></div>
-      <div class="path-stat"><span class="p-val">${distance}</span><span class="p-lbl">Distance</span></div>
-      <div class="path-stat"><span class="p-val">${interchanges.length}</span><span class="p-lbl">Interchanges</span></div>
-      <div class="path-stat"><span class="p-val">${Math.round(distance * 0.4)}</span><span class="p-lbl">Est. Min</span></div>
+      <div class="path-stat"><span class="p-val">${degrees}</span><span class="p-lbl">Degrees</span></div>
+      <div class="path-stat"><span class="p-val">${mutual.length}</span><span class="p-lbl">Mutual Friends</span></div>
+      <div class="path-stat"><span class="p-val">${path.length}</span><span class="p-lbl">People</span></div>
+      <div class="path-stat"><span class="p-val">${commonInterests.length}</span><span class="p-lbl">Common Interests</span></div>
     </div>
+    <div style="font-size:9px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px;">MUTUAL FRIENDS</div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">${mutualHTML}</div>
+    <div style="font-size:9px;color:var(--text-muted);letter-spacing:1px;margin-bottom:4px;">COMMON INTERESTS: <span style="color:var(--text-secondary);">${interestHTML}</span></div>
+    <div style="font-size:9px;color:var(--text-muted);letter-spacing:1px;margin:10px 0 4px;">PATH</div>
     <div class="path-steps">${stepsHTML}</div>
-  `;
-}
-
-/* =============================================
-   PATH GRAPH ANALYSIS — "WHICH GRAPH IS THIS?"
-   ============================================= */
-function showPathAnalysis(result) {
-  const { path, edgeLines } = result;
-  const n = path.length;
-  const e = n - 1;
-  const linesUsed = [...new Set(edgeLines)];
-
-  const interchanges = [];
-  let curLine = edgeLines[0];
-  for (let i = 1; i < edgeLines.length; i++) {
-    if (edgeLines[i] !== curLine) {
-      interchanges.push({ station: stationMap.get(path[i]).name, from: curLine, to: edgeLines[i] });
-      curLine = edgeLines[i];
-    }
-  }
-
-  const props = [
-    { label: `Path Graph P${sub(n)}`, type: 'yes' },
-    { label: 'Connected', type: 'yes' },
-    { label: 'Acyclic', type: 'yes' },
-    { label: 'Tree', type: 'yes' },
-    { label: 'Bipartite', type: 'yes' },
-    { label: 'Planar', type: 'yes' },
-    { label: `Weighted (${e} edges)`, type: 'info' },
-    { label: `${linesUsed.length} Line${linesUsed.length > 1 ? 's' : ''}`, type: 'info' },
-  ];
-
-  const linesHTML = linesUsed.map(l =>
-    `<div class="analysis-line-item"><div class="analysis-line-bar" style="background:${LINES[l].color};"></div>${LINES[l].name}</div>`
-  ).join('');
-
-  const interHTML = interchanges.length
-    ? interchanges.map(ic =>
-        `<div class="analysis-line-item"><div class="analysis-line-bar" style="background:var(--accent);"></div>${ic.station}: ${LINES[ic.from].name} → ${LINES[ic.to].name}</div>`
-      ).join('')
-    : '<div class="analysis-line-item" style="color:var(--text-muted);">No interchanges needed</div>';
-
-  analysisCard.style.display = 'block';
-  analysisOutput.innerHTML = `
-    <div class="analysis-type">Path Graph P${sub(n)}</div>
-    <div class="analysis-sub">
-      Your route with <strong>${n} vertices</strong> (stations) and <strong>${e} edges</strong> (connections) forms a <strong>Path Graph</strong> — a connected, acyclic, planar graph where each internal vertex has degree 2 and endpoints have degree 1. This is also a <strong>tree</strong> (connected + acyclic), and all trees are <strong>bipartite</strong>.
-    </div>
-    <div class="analysis-props">${props.map(p => `<span class="analysis-tag ${p.type}">${p.label}</span>`).join('')}</div>
-    <div class="analysis-lines">
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;font-weight:600;">LINES TRAVERSED</div>
-      ${linesHTML}
-    </div>
-    <div class="analysis-lines" style="margin-top:10px;">
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;font-weight:600;">INTERCHANGES</div>
-      ${interHTML}
-    </div>
   `;
 }
 
@@ -515,70 +572,63 @@ function showPathAnalysis(result) {
    NETWORK PROPERTIES
    ============================================= */
 function updateNetworkProps() {
-  const V = STATIONS.length, E = EDGES.length;
-  const lineSet = new Set();
-  STATIONS.forEach(s => s.lines.forEach(l => lineSet.add(l)));
-  const interchangeCount = STATIONS.filter(s => s.interchange).length;
+  const V = PEOPLE.length, E = FRIENDSHIPS.length;
+  const avgDeg = (E * 2 / V).toFixed(1);
+  const maxDeg = Math.max(...PEOPLE.map(p => adj.get(p.id).length));
+  const busiest = PEOPLE.filter(p => adj.get(p.id).length === maxDeg).map(p => p.name).join(', ');
 
-  const maxDeg = Math.max(...STATIONS.map(s => adj.get(s.id).length));
-  const interchangeMax = STATIONS.find(s => adj.get(s.id).length === maxDeg);
+  // Count inter-group edges
+  const crossEdges = FRIENDSHIPS.filter(f => !sameGroup(f.from, f.to)).length;
 
   propsGrid.innerHTML = `
-    <div class="mini-prop"><span class="mini-val">${V}</span><span class="mini-lbl">Vertices</span></div>
-    <div class="mini-prop"><span class="mini-val">${E}</span><span class="mini-lbl">Edges</span></div>
-    <div class="mini-prop"><span class="mini-val">${lineSet.size}</span><span class="mini-lbl">Lines</span></div>
-    <div class="mini-prop"><span class="mini-val">${interchangeCount}</span><span class="mini-lbl">Interchanges</span></div>
+    <div class="mini-prop"><span class="mini-val">${V}</span><span class="mini-lbl">People</span></div>
+    <div class="mini-prop"><span class="mini-val">${E}</span><span class="mini-lbl">Connections</span></div>
+    <div class="mini-prop"><span class="mini-val">${avgDeg}</span><span class="mini-lbl">Avg Friends</span></div>
+    <div class="mini-prop"><span class="mini-val">${crossEdges}</span><span class="mini-lbl">Cross-Group</span></div>
   `;
 
-  const avgDeg = (E * 2 / V).toFixed(1);
   const props = [
-    'Connected', 'Weighted', `Avg Degree ${avgDeg}`,
-    `Max Degree ${maxDeg}`, 'Planar', 'Cyclic'
+    'Connected', 'Weighted', `Max Degree ${maxDeg}`,
+    `5 Groups`, `${V} People`, `${E} Edges`
   ];
-
-  // Check bipartiteness
-  const col = new Map(); let isBip = true;
-  for (const s of STATIONS) {
-    if (col.has(s.id)) continue;
-    col.set(s.id, 0); const q = [s.id];
-    while (q.length && isBip) {
-      const c = q.shift();
-      adj.get(c).forEach(({ to }) => {
-        if (!col.has(to)) { col.set(to, 1 - col.get(c)); q.push(to); }
-        else if (col.get(to) === col.get(c)) isBip = false;
-      });
-    }
-  }
-  if (isBip) props.splice(3, 0, 'Bipartite');
-
   detectedProps.innerHTML = props.map(p => `<span class="prop-tag">${p}</span>`).join('');
 
-  conceptsList.innerHTML = `
-    <div class="concept-item">
-      <div class="concept-icon"><svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3" fill="#00e5a0"/></svg></div>
-      <div class="concept-text"><strong>Vertices = Stations:</strong> Each of the ${V} metro stations is a vertex. Interchange stations like <strong>Kashmere Gate</strong> (degree ${adj.get('kashmere_gate').length}) have the highest degrees because multiple lines converge there.</div>
+  updateGraphTypes(V, E, avgDeg, maxDeg, crossEdges, busiest);
+}
+
+/* =============================================
+   GRAPH TYPES DEMONSTRATED
+   ============================================= */
+function updateGraphTypes(V, E, avgDeg, maxDeg, crossEdges, busiest) {
+  const types = [
+    { name:'Connected', explain:'Every person can reach every other person through friendship chains. The network forms a single connected component.' },
+    { name:'Weighted', explain:'Each edge can represent connection strength (close friend vs acquaintance). Pathfinding can prioritize stronger bonds.' },
+    { name:'Undirected', explain:'Friendships are mutual — if Alice is friends with Bob, Bob is friends with Alice. Edge (A,B) = Edge (B,A).' },
+    { name:'Cyclic', explain:'Friend circles exist — e.g., Alice→Bob→Charlie→Alice forms a cycle of length 3 within the college group.' },
+    { name:'Acyclic Subgraph', explain:'The BFS tree from any person is acyclic — it shows the shortest friendship chain without any loops.' },
+    { name:'Path Graph', explain:'The shortest social path between two people (shown above when you find a connection) forms a path graph Pₙ.' },
+    { name:'Complete Subgraph', explain:'Tight friend groups are near-complete — the college group has 8 edges among 5 people (K₅ has 10). These are cliques.' },
+    { name:'Bipartite', explain:'People ↔ Interest Groups form a bipartite graph. Each person connects to their interests, never to other interests directly.' },
+    { name:'Tree Structure', explain:'A BFS/DFS traversal from any node creates a tree — connected and acyclic, showing how information spreads.' },
+    { name:'Regular (approx)', explain:'Most people have ~3-4 friends, making the network approximately regular. Degree variance is low.' },
+    { name:'Planar (groups)', explain:'Each individual friend group can be drawn without edge crossings. The full network with cross-edges is non-planar.' },
+    { name:'Non-Planar', explain:'With 25 vertices and 42 edges, the full network exceeds E ≤ 3V−6 = 69, and dense subgraphs create unavoidable crossings.' },
+    { name:'Finite', explain:'The network has exactly 25 people and 42 connections — both are countable and limited.' },
+    { name:'Simple Graph', explain:'No self-loops (you can\'t befriend yourself) and at most one edge between any pair (single friendship).' },
+    { name:'Multi-Graph Potential', explain:'If we add multiple relationship types (friend, colleague, family), parallel edges between the same pair would form a multi-graph.' },
+    { name:'Directed Potential', explain:'If we model "follows" (A follows B, B may not follow A), the undirected graph becomes a directed graph (digraph).' },
+    { name:'Hub Nodes', explain:`${busiest} (degree ${maxDeg}) acts as a hub — a highly connected person who bridges different social circles.` },
+    { name:'Cut Vertices', explain:'Bridge people (e.g., Alice connecting college to family) are cut vertices — removing them would disconnect parts of the network.' },
+    { name:'Clustering', explain:'Friend groups show high clustering — people within a group are densely connected, while cross-group links are sparse.' },
+    { name:'Small World', explain:'Despite 25 people, the average distance between any two is ~3 hops — demonstrating the "six degrees of separation" principle.' }
+  ];
+
+  graphTypesList.innerHTML = types.map(t => `
+    <div class="gt-item">
+      <span class="gt-name">${t.name}</span>
+      <span class="gt-explain">${t.explain}</span>
     </div>
-    <div class="concept-item">
-      <div class="concept-icon"><svg viewBox="0 0 10 10"><line x1="1" y1="9" x2="9" y2="1" stroke="#00e5a0" stroke-width="1.5"/></svg></div>
-      <div class="concept-text"><strong>Edges = Track Segments:</strong> ${E} edges connect adjacent stations. Each edge carries a <strong>weight</strong> (distance), making this a <strong>Weighted Graph</strong>.</div>
-    </div>
-    <div class="concept-item">
-      <div class="concept-icon"><svg viewBox="0 0 10 10"><circle cx="5" cy="3" r="2" fill="#00e5a0"/><circle cx="3" cy="7" r="2" fill="#00e5a0"/><circle cx="7" cy="7" r="2" fill="#00e5a0"/></svg></div>
-      <div class="concept-text"><strong>Connected Graph:</strong> Any station can reach any other station — the network forms a single connected component. This is essential for public transit.</div>
-    </div>
-    <div class="concept-item">
-      <div class="concept-icon"><svg viewBox="0 0 10 10"><rect x="2" y="2" width="6" height="6" fill="none" stroke="#00e5a0" stroke-width="1.2"/><line x1="2" y1="2" x2="8" y2="8" stroke="#00e5a0" stroke-width="0.8"/></svg></div>
-      <div class="concept-text"><strong>Cyclic Graph:</strong> The network contains multiple cycles — you can take different routes between stations (e.g., Rajiv Chowk → Kashmere Gate via Yellow or via Blue+Red). This is what makes pathfinding meaningful.</div>
-    </div>
-    <div class="concept-item">
-      <div class="concept-icon"><svg viewBox="0 0 10 10"><text x="5" y="7" text-anchor="middle" fill="#00e5a0" font-size="6" font-weight="bold">D</text></svg></div>
-      <div class="concept-text"><strong>Dijkstra's Algorithm:</strong> Select two stations above — the algorithm finds the minimum-distance path through this ${V}-vertex graph, the same principle used by the DMRC app and Google Maps.</div>
-    </div>
-    <div class="concept-item">
-      <div class="concept-icon"><svg viewBox="0 0 10 10"><path d="M2,8 L5,2 L8,8" fill="none" stroke="#00e5a0" stroke-width="1.2"/></svg></div>
-      <div class="concept-text"><strong>Interchange Nodes:</strong> ${interchangeCount} stations serve as interchanges. In graph terms, they are <strong>cut vertices</strong> — removing one would disconnect parts of the network.</div>
-    </div>
-  `;
+  `).join('');
 }
 
 /* =============================================
@@ -586,22 +636,22 @@ function updateNetworkProps() {
    ============================================= */
 findPathBtn.addEventListener('click', findPath);
 resetBtn.addEventListener('click', () => {
-  sourceSelect.value = ''; destSelect.value = '';
-  clearPath();
+  personASelect.value = ''; personBSelect.value = '';
+  clearPath(); clearHighlights();
+  profileCard.style.display = 'none';
 });
 randomBtn.addEventListener('click', () => {
-  const ids = STATIONS.map(s => s.id);
-  const a = ids[Math.floor(Math.random() * ids.length)];
-  let b = a; while (b === a) b = ids[Math.floor(Math.random() * ids.length)];
-  sourceSelect.value = a; destSelect.value = b;
+  const ids = PEOPLE.map(p => p.id);
+  const a = ids[Math.floor(Math.random()*ids.length)];
+  let b = a; while(b===a) b = ids[Math.floor(Math.random()*ids.length)];
+  personASelect.value = a; personBSelect.value = b;
   findPath();
 });
 
-// Keyboard
 document.addEventListener('keydown', e => {
-  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
-  if (e.key === 'Enter') findPath();
-  if (e.key === 'r' || e.key === 'R') { sourceSelect.value = ''; destSelect.value = ''; clearPath(); }
+  if (e.target.tagName==='SELECT'||e.target.tagName==='INPUT') return;
+  if (e.key==='Enter') findPath();
+  if (e.key==='r'||e.key==='R') { personASelect.value=''; personBSelect.value=''; clearPath(); clearHighlights(); }
 });
 
 /* =============================================

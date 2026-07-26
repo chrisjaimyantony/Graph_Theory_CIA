@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DMRC — Graph Theory in Practice</title>
+    <title>Social Network — Graph Theory in Practice</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="application.css">
 </head>
 <body>
@@ -17,8 +17,8 @@
                 Lessons
             </a>
             <div class="header-center">
-                <h1 class="header-title">Delhi Metro Rail Corporation</h1>
-                <p class="header-sub">Graph Theory in Real-World Transit Networks</p>
+                <h1 class="header-title">Social Network Analysis</h1>
+                <p class="header-sub">Graph Theory in Real-World Connections</p>
             </div>
             <span class="header-badge">APPLICATION</span>
         </header>
@@ -27,31 +27,36 @@
             <aside class="sidebar-panel" id="sidebarPanel">
 
                 <div class="control-card">
-                    <h3 class="card-heading">Route Finder</h3>
+                    <h3 class="card-heading">Social Path Finder</h3>
                     <div class="select-row">
-                        <label>From</label>
-                        <select id="sourceSelect"><option value="">— choose station —</option></select>
+                        <label>Person A</label>
+                        <select id="personA"><option value="">— choose —</option></select>
                     </div>
                     <div class="select-row">
-                        <label>To</label>
-                        <select id="destSelect"><option value="">— choose station —</option></select>
+                        <label>Person B</label>
+                        <select id="personB"><option value="">— choose —</option></select>
                     </div>
                     <div class="btn-row">
-                        <button class="btn btn-primary" id="findPathBtn">Find Shortest Path</button>
+                        <button class="btn btn-primary" id="findPathBtn">Find Path</button>
                         <button class="btn btn-outline" id="resetBtn">Reset</button>
                     </div>
-                    <button class="btn btn-ghost" id="randomBtn">Random Route</button>
-                    <p class="hint-text">Click stations on the map to select them</p>
+                    <button class="btn btn-ghost" id="randomBtn">Random People</button>
+                    <p class="hint-text">Click people on the map to select them</p>
                 </div>
 
                 <div class="control-card" id="pathCard" style="display:none;">
-                    <h3 class="card-heading">Path Found</h3>
+                    <h3 class="card-heading">Connection Path</h3>
                     <div id="pathOutput"></div>
                 </div>
 
-                <div class="control-card" id="analysisCard" style="display:none;">
-                    <h3 class="card-heading">Graph Analysis</h3>
-                    <div id="analysisOutput"></div>
+                <div class="control-card" id="profileCard" style="display:none;">
+                    <h3 class="card-heading">Profile</h3>
+                    <div id="profileOutput"></div>
+                </div>
+
+                <div class="control-card" id="suggestCard" style="display:none;">
+                    <h3 class="card-heading">People You May Know</h3>
+                    <div id="suggestOutput"></div>
                 </div>
 
                 <div class="control-card">
@@ -61,29 +66,35 @@
                 </div>
 
                 <div class="control-card">
-                    <h3 class="card-heading">Graph Concepts Demonstrated</h3>
-                    <div class="concepts-list" id="conceptsList"></div>
+                    <h3 class="card-heading">Graph Types Demonstrated</h3>
+                    <div class="graph-types-list" id="graphTypesList"></div>
                 </div>
 
             </aside>
 
             <main class="map-area">
                 <div class="map-wrap" id="mapWrap">
-                    <svg id="metroMap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+                    <svg id="networkMap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 530">
                         <defs>
                             <filter id="glow">
                                 <feGaussianBlur stdDeviation="3" result="blur"/>
                                 <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                             </filter>
+                            <filter id="nodeGlow">
+                                <feGaussianBlur stdDeviation="4" result="blur"/>
+                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
                         </defs>
+                        <g id="groupLabelsG"></g>
                         <g id="edgesG"></g>
                         <g id="pathG"></g>
+                        <g id="suggestG"></g>
                         <g id="nodesG"></g>
-                        <g id="legendG" transform="translate(20,485)"></g>
+                        <g id="legendG" transform="translate(15,500)"></g>
                     </svg>
                 </div>
                 <div class="station-info" id="stationInfo">
-                    <span class="info-empty">Hover over a station to see details · Click to select</span>
+                    <span class="info-empty">Hover over a person to see details · Click to select</span>
                 </div>
             </main>
         </div>
