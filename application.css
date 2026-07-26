@@ -252,3 +252,17 @@ body { font-family:'JetBrains Mono',monospace; color:var(--text-primary); backgr
 @media (max-width:600px) {
     .btn-row { flex-direction:column; }
 }
+
+/* ─── REFERENCES ─── */
+.references-list { display:flex; flex-direction:column; gap:5px; }
+.ref-item {
+    background:rgba(0,212,255,0.02);
+    border:1px solid rgba(0,212,255,0.06);
+    border-radius:3px; padding:8px 10px;
+    display:flex; flex-direction:column; gap:2px;
+    transition:border-color .2s;
+}
+.ref-item:hover { border-color:rgba(0,212,255,0.2); }
+.ref-author { font-size:9px; color:var(--accent); font-weight:500; letter-spacing:.3px; }
+.ref-title { font-size:10px; font-weight:600; color:var(--text-primary); font-style:italic; }
+.ref-publisher { font-size:9px; color:var(--text-muted); }

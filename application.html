@@ -26,6 +26,7 @@
         <div class="app-body">
             <aside class="sidebar-panel" id="sidebarPanel">
 
+                <!-- Route Finder -->
                 <div class="control-card">
                     <h3 class="card-heading">Social Path Finder</h3>
                     <div class="select-row">
@@ -44,30 +45,67 @@
                     <p class="hint-text">Click people on the map to select them</p>
                 </div>
 
+                <!-- Path Result -->
                 <div class="control-card" id="pathCard" style="display:none;">
                     <h3 class="card-heading">Connection Path</h3>
                     <div id="pathOutput"></div>
                 </div>
 
+                <!-- Person Profile -->
                 <div class="control-card" id="profileCard" style="display:none;">
                     <h3 class="card-heading">Profile</h3>
                     <div id="profileOutput"></div>
                 </div>
 
+                <!-- Suggestions -->
                 <div class="control-card" id="suggestCard" style="display:none;">
                     <h3 class="card-heading">People You May Know</h3>
                     <div id="suggestOutput"></div>
                 </div>
 
+                <!-- Network Properties -->
                 <div class="control-card">
                     <h3 class="card-heading">Network Properties</h3>
                     <div class="props-grid" id="propsGrid"></div>
                     <div class="detected-props" id="detectedProps"></div>
                 </div>
 
+                <!-- Graph Types -->
                 <div class="control-card">
                     <h3 class="card-heading">Graph Types Demonstrated</h3>
                     <div class="graph-types-list" id="graphTypesList"></div>
+                </div>
+
+                <!-- References -->
+                <div class="control-card">
+                    <h3 class="card-heading">References</h3>
+                    <div class="references-list">
+                        <div class="ref-item">
+                            <span class="ref-author">Watts, D. J., &amp; Strogatz, S. H. (1998)</span>
+                            <span class="ref-title">Collective dynamics of 'small-world' networks</span>
+                            <span class="ref-publisher">Nature, 393(6684), 440–442</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-author">Milgram, S. (1967)</span>
+                            <span class="ref-title">The small world problem</span>
+                            <span class="ref-publisher">Psychology Today, 1(1), 61–67</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-author">Goldenberg, D. (2021)</span>
+                            <span class="ref-title">Social Network Analysis: From Graph Theory to Applications with Python</span>
+                            <span class="ref-publisher">arXiv preprint, arXiv:2102.03245</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-author">Borgatti, S. P., Everett, M. G., &amp; Johnson, J. C. (2024)</span>
+                            <span class="ref-title">Analyzing Social Networks</span>
+                            <span class="ref-publisher">SAGE Publications Ltd</span>
+                        </div>
+                        <div class="ref-item">
+                            <span class="ref-author">Wasserman, S., &amp; Faust, K. (2012)</span>
+                            <span class="ref-title">Social Network Analysis: Methods and Applications</span>
+                            <span class="ref-publisher">Cambridge University Press</span>
+                        </div>
+                    </div>
                 </div>
 
             </aside>
@@ -78,11 +116,17 @@
                         <defs>
                             <filter id="glow">
                                 <feGaussianBlur stdDeviation="3" result="blur"/>
-                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                <feMerge>
+                                    <feMergeNode in="blur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
                             </filter>
                             <filter id="nodeGlow">
                                 <feGaussianBlur stdDeviation="4" result="blur"/>
-                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                <feMerge>
+                                    <feMergeNode in="blur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
                             </filter>
                         </defs>
                         <g id="groupLabelsG"></g>
